@@ -104,14 +104,15 @@ To simulate serine model MIDs, the lower and upper bounds of fractional enrichme
 * `F`: 200 pmol/mg/h
 * `n_sim`: 50,000
 * `tspan`: 0 to 4 h with a step size of 0.1 h
+* Source fluxes of a target metabolite: For glioma serine, three labeled sources are glucose-derived serine synthesis (`PGg == SERg`), plasma serine uptake (`SERp == SERg`), and TME-derived serine uptake (`SERc == SERg`). For cortex serine, two labeled sources are glucose-derived phosphoglycerate (`PGc == SERc`) and plasma serine uptake (`SERp == SERc`).
+* Target flux: Any of the labeled sources described above. A simulation can be performed on one target flux at a time.
 * Lower and upper bounds for input metabolite MIDs: Plasma serine (SERp), cortex phosphoglycerate (PGc), and glioma phosphoglycerate (PGg) are the input metabolites of the serine model, and the bounds of fractional enrichment of their isotopologues are set as follows according to our patient MIDs:
+
 | Metabolite | M + 1 Bounds | M + 2 Bounds | M + 3 Bounds |
 | ---------- | ------------ | ------------ | ------------ |
 | PGg        | [0, 0.06]    | [0, 0.035]   | [0.02, 0.17] |
 | PGc        | [0, 0.03]    | [0, 0.015]   | [0.02, 0.25] |
 | SERp       | [0.2, 0.7]   | [0, 0.02]    | [0, 0.01]    |
-* Source fluxes of a target metabolite: For glioma serine, three labeled sources are glucose-derived serine synthesis (`PGg == SERg`), plasma serine uptake (`SERp == SERg`), and TME-derived serine uptake (`SERc == SERg`). For cortex serine, two labeled sources are glucose-derived phosphoglycerate (`PGc == SERc`) and plasma serine uptake (`SERp == SERc`).
-* Target flux: Any of the labeled sources described above. A simulation can be performed on one target flux at a time.
 
 ## Replication of Purine Simulation in the Manuscript
 
@@ -127,13 +128,14 @@ To simulate purine model MIDs, the lower and upper bounds of fractional enrichme
 * `F`: 200 pmol/mg/h
 * `n_sim`: 50,000
 * `tspan`: 0 to 4 h with a step size of 0.1 h
+* Source fluxes of a target metabolite: For GMP, two labeled sources are de novo GMP synthesis (`IMP == GMP`) and salvage GMP pathway (`GUA + R5P == GMP`). 
+* Target flux: Any of the labeled sources described above. A simulation can be performed on one target flux at a time.
 * Lower and upper bounds for input metabolite MIDs: Serine (SER), and ribose 5-phosphate (R5P) are the input metabolites of the purine model, and the bounds of fractional enrichment of their isotopologues are set as follows according to our patient MIDs:
+
 | Metabolite | M + 1 Bounds | M + 2 Bounds | M + 3 Bounds | M + 4 Bounds | M + 5 Bounds |
 | ---------- | ------------ | ------------ | ------------ | ------------ | ------------ |
 | SER        | [0.04, 0.2]  | [0, 0.08]    | [0, 0.12]    |              |              |
 | R5P        | [0, 0.06]    | [0, 0.08]    | [0, 0.12]    | [0, 0.03]    | [0, 0.08]    |
-* Source fluxes of a target metabolite: For GMP, two labeled sources are de novo GMP synthesis (`IMP == GMP`) and salvage GMP pathway (`GUA + R5P == GMP`). 
-* Target flux: Any of the labeled sources described above. A simulation can be performed on one target flux at a time.
 
 ## Output Files of Flux and MID simulations
 

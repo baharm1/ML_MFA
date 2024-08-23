@@ -1,0 +1,13 @@
+{
+    "model_name": "purine",
+	"model_dir": "purine_model",
+	"patient_dir": "patient_input_purine",
+    "output_dir": "./output_purine",
+    "module_gene_file": "module_gene_purine.csv",
+    "stoichiometry_matrix": "cmMat_purine.csv",
+	"isotopologue_matrix": "mmMat_purine.csv",
+	"compound_name_file": "cName_purine.csv",
+	"isotopologue_name_file": "mName_purine.csv",
+	"n_mids": 6,
+	"n_balanced_metabs": 6
+}

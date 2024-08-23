@@ -1,0 +1,13 @@
+{
+    "model_name": "serine",
+	"model_dir": "serine_model",
+	"patient_dir": "patient_input_serine",
+    "output_dir": "./output_serine",
+    "module_gene_file": "module_gene_serine.csv",
+    "stoichiometry_matrix": "cmMat_serine.csv",
+	"isotopologue_matrix": "mmMat_serine.csv",
+	"compound_name_file": "cName_serine.csv",
+	"isotopologue_name_file": "mName_serine.csv",
+	"n_mids": 3,
+	"n_balanced_metabs": 1
+}

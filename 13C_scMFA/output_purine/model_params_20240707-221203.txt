@@ -1,0 +1,14 @@
+	0
+run_time	7301.587986707687
+compoundBalance_g	1
+negativeFlux_g	1
+cellVar_g	1
+moduleVar_g	1
+isotoplogueBalance_g	1
+n_modules	34
+n_metabs	6
+n_mids	6
+n_cells	2282
+n_batches	2282
+n_epochs	61779
+sc_imputation	True

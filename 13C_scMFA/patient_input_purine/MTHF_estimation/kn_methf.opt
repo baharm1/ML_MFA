@@ -1,0 +1,15 @@
+
+# General
+algorithm		4 # Original is 4 = SQP algorithm
+honorbnds		2 # initp
+bar_feasible		0 # no
+bar_switchrule		2 # level2 was not found
+derivcheck		0 # none
+# derivcheck_tol		1e-04	
+bar_relaxcons		1 # eqs
+outlev 			3 # iter
+bar_maxcrossit		5
+outmode 		2 # both
+gradopt			2 # Original = 2
+maxtime_real		600
+maxit			200

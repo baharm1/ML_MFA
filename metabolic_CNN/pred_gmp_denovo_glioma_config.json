@@ -1,0 +1,16 @@
+{
+    "model_dir": "./gmp_denovo_glioma_config_20240517_1138",
+    "mice_dir": "./data/mice_data/imputed_mice_mmf_mid_glioma_2405_1e4_rm0_100",
+    "mice_mid_name": "./data/mice_data/mid_name_mice_mmf_2405_rm0.txt",
+	"mice_time": 4,
+	"patient_dir": "./data/patient_data/imputed_patient_mid_glioma_2405_1e4_rm0_100",
+	"patient_mid_name": "./data/patient_data/mid_name_patient_2405_rm0.txt",
+	"patient_time": "./data/patient_data/patient_time.txt",
+	"order_input_mids": ["IMP1", "IMP2", "IMP3", "IMP4", "IMP5", "GMP1", "GMP2", "GMP3", "GMP4", "GMP5", "GDP1", "GDP2", "GDP3", "GDP4", "GDP5", "GUO1", "GUO2", "GUO3", "GUO4", "GUO5", "INO1", "INO2", "INO3", "INO4", "INO5", "AMP1", "AMP2", "AMP3", "AMP4", "AMP5", "R5P1", "R5P2", "R5P3", "R5P4", "R5P5", "SER1", "SER2", "SER3"],
+	"hypothetical_MIDs": ["SER4", "SER5"],
+	"max_time": 4,
+	"min_time": 2,
+	"delta_t_sim": 0.1,
+	"n_metabs": 8,
+	"n_mids": 5
+}

@@ -1,0 +1,19 @@
+{
+    "sim_data_dir": "./data/sim_data",
+    "sim_data_filename": "simulated_data_gmp_denovo_glioma.csv",
+    "sim_param_filename": "simulation_parameters_gmp_denovo_glioma.csv",
+    "cols_sim_data": ["index", "time", "IMP1", "IMP2", "IMP3", "IMP4", "IMP5", "GMP1", "GMP2", "GMP3", "GMP4", "GMP5", "GDP1", "GDP2", "GDP3", "GDP4", "GDP5", "GUO1", "GUO2", "GUO3", "GUO4", "GUO5", "INO1", "INO2", "INO3", "INO4", "INO5", "AMP1", "AMP2", "AMP3", "AMP4", "AMP5"],
+    "cols_sim_param": ["R5P1", "R5P2", "R5P3", "R5P4", "R5P5", "SER1", "SER2", "SER3", "IMP == GMP", "GUA + R5P == GMP"],
+	"order_input_mids": ["IMP1", "IMP2", "IMP3", "IMP4", "IMP5", "GMP1", "GMP2", "GMP3", "GMP4", "GMP5", "GDP1", "GDP2", "GDP3", "GDP4", "GDP5", "GUO1", "GUO2", "GUO3", "GUO4", "GUO5", "INO1", "INO2", "INO3", "INO4", "INO5", "AMP1", "AMP2", "AMP3", "AMP4", "AMP5", "R5P1", "R5P2", "R5P3", "R5P4", "R5P5", "SER1", "SER2", "SER3"],
+	"max_time": 4,
+	"min_time": 2,
+	"delta_t_sim": 0.1,
+	"n_metabs": 8,
+	"n_mids": 5,
+	"metab_sources": ["IMP == GMP", "GUA + R5P == GMP"],
+	"target_flux": "IMP == GMP",
+	"name_rel_flux": "denovo",
+	"non_mid_cols": ["index", "time"],
+	"hypothetical_MIDs": ["SER4", "SER5"]
+	
+}

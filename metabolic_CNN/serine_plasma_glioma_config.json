@@ -1,0 +1,18 @@
+{
+    "sim_data_dir": "./data/sim_data",
+    "sim_data_filename": "simulated_data_serine_plasma_glioma.csv",
+    "sim_param_filename": "simulation_parameters_serine_plasma_glioma.csv",
+    "cols_sim_data": ["index", "time", "SER1", "SER2", "SER3", "PG1", "PG2", "PG3", "SERc1", "SERc2", "SERc3", "PGc1", "PGc2", "PGc3"],
+    "cols_sim_param": ["SERp1", "SERp2", "SERp3", "PGg == SERg", "SERp == SERg", "SERc == SERg"],
+	"order_input_mids": ["SER1", "SER2", "SER3", "PG1", "PG2", "PG3", "SERp1", "SERp2", "SERp3", "SERc1", "SERc2", "SERc3", "PGc1", "PGc2", "PGc3"],
+	"max_time": 4,
+	"min_time": 2,
+	"delta_t_sim": 0.1,
+	"n_metabs": 5,
+	"n_mids": 3,
+	"metab_sources": ["PGg == SERg", "SERp == SERg", "SERc == SERg"],
+	"target_flux": "SERp == SERg",
+	"name_rel_flux": "plasma",
+	"non_mid_cols": ["index", "time"],
+	"hypothetical_MIDs": ""
+}

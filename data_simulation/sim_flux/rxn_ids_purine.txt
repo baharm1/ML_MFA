@@ -1,0 +1,22 @@
+SERg == GLYg + MTHFg
+SERg == GLYg + MTHFg
+GLYg == MTHFg + CO2
+MTHFg == 0
+GLYg == 0
+GLY + MTHF + MTHF + R5P + CO2 == IMP
+R5P + HPX == IMP
+IMP == GMP
+GUA + R5P == GMP
+GMP == GDP
+GDP == 0
+GMP == GUO
+GUA + R5P == GUO
+GUO == 0
+IMP == INO
+IMP == AMP
+AMP == IMP
+R5P + HPX == INO
+INO == 0
+ADE == AMP
+ADE == INO
+AMP == 0

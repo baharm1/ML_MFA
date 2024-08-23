@@ -1,0 +1,79 @@
+GLYc
+((SERc_1 + SERc_2)*(v3 - (200*v4)/(v4 - 1)))/c1 - (GLYc_1*v15)/c1 - (GLYc_1*v21)/c1 + (200*GLYc_1*v4)/(c1*(v4 - 1))
+((SERc_3 + SERc_4)*(v3 - (200*v4)/(v4 - 1)))/c1 - (GLYc_2*v15)/c1 - (GLYc_2*v21)/c1 + (200*GLYc_2*v4)/(c1*(v4 - 1))
+((SERc_5 + SERc_6)*(v3 - (200*v4)/(v4 - 1)))/c1 - (GLYc_3*v15)/c1 - (GLYc_3*v21)/c1 + (200*GLYc_3*v4)/(c1*(v4 - 1))
+((SERc_7 + SERc_8)*(v3 - (200*v4)/(v4 - 1)))/c1 - (GLYc_4*v15)/c1 - (GLYc_4*v21)/c1 + (200*GLYc_4*v4)/(c1*(v4 - 1))
+GLYg
+((SERg_1 + SERg_2)*(v1 - (200*v2)/(v2 - 1)))/c2 - (GLYg_1*v14)/c2 - (GLYg_1*v19)/c2 + (200*GLYg_1*v2)/(c2*(v2 - 1))
+((SERg_3 + SERg_4)*(v1 - (200*v2)/(v2 - 1)))/c2 - (GLYg_2*v14)/c2 - (GLYg_2*v19)/c2 + (200*GLYg_2*v2)/(c2*(v2 - 1))
+((SERg_5 + SERg_6)*(v1 - (200*v2)/(v2 - 1)))/c2 - (GLYg_3*v14)/c2 - (GLYg_3*v19)/c2 + (200*GLYg_3*v2)/(c2*(v2 - 1))
+((SERg_7 + SERg_8)*(v1 - (200*v2)/(v2 - 1)))/c2 - (GLYg_4*v14)/c2 - (GLYg_4*v19)/c2 + (200*GLYg_4*v2)/(c2*(v2 - 1))
+MTHFc
+(v15*(GLYc_1 + GLYc_3))/c3 + ((v3 - (200*v4)/(v4 - 1))*(SERc_1 + SERc_3 + SERc_5 + SERc_7))/c3 - (MTHFc_1*v20)/c3 + (200*MTHFc_1*v4)/(c3*(v4 - 1))
+(v15*(GLYc_2 + GLYc_4))/c3 + ((v3 - (200*v4)/(v4 - 1))*(SERc_2 + SERc_4 + SERc_6 + SERc_8))/c3 - (MTHFc_2*v20)/c3 + (200*MTHFc_2*v4)/(c3*(v4 - 1))
+MTHFg
+(v14*(GLYg_1 + GLYg_3))/c4 + ((v1 - (200*v2)/(v2 - 1))*(SERg_1 + SERg_3 + SERg_5 + SERg_7))/c4 - (MTHFg_1*v18)/c4 + (200*MTHFg_1*v2)/(c4*(v2 - 1))
+(v14*(GLYg_2 + GLYg_4))/c4 + ((v1 - (200*v2)/(v2 - 1))*(SERg_2 + SERg_4 + SERg_6 + SERg_8))/c4 - (MTHFg_2*v18)/c4 + (200*MTHFg_2*v2)/(c4*(v2 - 1))
+PGc
+(PGic_1*v6)/c5 - (PGc_1*v8)/c5
+(PGic_2*v6)/c5 - (PGc_2*v8)/c5
+(PGic_3*v6)/c5 - (PGc_3*v8)/c5
+(PGic_4*v6)/c5 - (PGc_4*v8)/c5
+(PGic_5*v6)/c5 - (PGc_5*v8)/c5
+(PGic_6*v6)/c5 - (PGc_6*v8)/c5
+(PGic_7*v6)/c5 - (PGc_7*v8)/c5
+(PGic_8*v6)/c5 - (PGc_8*v8)/c5
+PGg
+(PGig_1*v5)/c6 - (PGg_1*v7)/c6
+(PGig_2*v5)/c6 - (PGg_2*v7)/c6
+(PGig_3*v5)/c6 - (PGg_3*v7)/c6
+(PGig_4*v5)/c6 - (PGg_4*v7)/c6
+(PGig_5*v5)/c6 - (PGg_5*v7)/c6
+(PGig_6*v5)/c6 - (PGg_6*v7)/c6
+(PGig_7*v5)/c6 - (PGg_7*v7)/c6
+(PGig_8*v5)/c6 - (PGg_8*v7)/c6
+PGic
+0
+0
+0
+0
+0
+0
+0
+0
+PGig
+0
+0
+0
+0
+0
+0
+0
+0
+SERc
+v12/c7 - (SERc_1*(v3 - (200*v4)/(v4 - 1)))/c7 + (PGc_1*v8)/c7 - (SERc_1*v13)/c7 - (SERc_1*v17)/c7 + (SERp_1*v10)/c7 - (200*GLYc_1*MTHFc_1*v4)/(c7*(v4 - 1))
+(PGc_2*v8)/c7 - (SERc_2*(v3 - (200*v4)/(v4 - 1)))/c7 - (SERc_2*v13)/c7 - (SERc_2*v17)/c7 + (SERp_2*v10)/c7 - (200*GLYc_1*MTHFc_2*v4)/(c7*(v4 - 1))
+(PGc_3*v8)/c7 - (SERc_3*(v3 - (200*v4)/(v4 - 1)))/c7 - (SERc_3*v13)/c7 - (SERc_3*v17)/c7 + (SERp_3*v10)/c7 - (200*GLYc_2*MTHFc_1*v4)/(c7*(v4 - 1))
+(PGc_4*v8)/c7 - (SERc_4*(v3 - (200*v4)/(v4 - 1)))/c7 - (SERc_4*v13)/c7 - (SERc_4*v17)/c7 + (SERp_4*v10)/c7 - (200*GLYc_2*MTHFc_2*v4)/(c7*(v4 - 1))
+(PGc_5*v8)/c7 - (SERc_5*(v3 - (200*v4)/(v4 - 1)))/c7 - (SERc_5*v13)/c7 - (SERc_5*v17)/c7 + (SERp_5*v10)/c7 - (200*GLYc_3*MTHFc_1*v4)/(c7*(v4 - 1))
+(PGc_6*v8)/c7 - (SERc_6*(v3 - (200*v4)/(v4 - 1)))/c7 - (SERc_6*v13)/c7 - (SERc_6*v17)/c7 + (SERp_6*v10)/c7 - (200*GLYc_3*MTHFc_2*v4)/(c7*(v4 - 1))
+(PGc_7*v8)/c7 - (SERc_7*(v3 - (200*v4)/(v4 - 1)))/c7 - (SERc_7*v13)/c7 - (SERc_7*v17)/c7 + (SERp_7*v10)/c7 - (200*GLYc_4*MTHFc_1*v4)/(c7*(v4 - 1))
+(PGc_8*v8)/c7 - (SERc_8*(v3 - (200*v4)/(v4 - 1)))/c7 - (SERc_8*v13)/c7 - (SERc_8*v17)/c7 + (SERp_8*v10)/c7 - (200*GLYc_4*MTHFc_2*v4)/(c7*(v4 - 1))
+SERg
+v11/c8 - (SERg_1*(v1 - (200*v2)/(v2 - 1)))/c8 + (PGg_1*v7)/c8 + (SERc_1*v13)/c8 - (SERg_1*v16)/c8 + (SERp_1*v9)/c8 - (200*GLYg_1*MTHFg_1*v2)/(c8*(v2 - 1))
+(PGg_2*v7)/c8 - (SERg_2*(v1 - (200*v2)/(v2 - 1)))/c8 + (SERc_2*v13)/c8 - (SERg_2*v16)/c8 + (SERp_2*v9)/c8 - (200*GLYg_1*MTHFg_2*v2)/(c8*(v2 - 1))
+(PGg_3*v7)/c8 - (SERg_3*(v1 - (200*v2)/(v2 - 1)))/c8 + (SERc_3*v13)/c8 - (SERg_3*v16)/c8 + (SERp_3*v9)/c8 - (200*GLYg_2*MTHFg_1*v2)/(c8*(v2 - 1))
+(PGg_4*v7)/c8 - (SERg_4*(v1 - (200*v2)/(v2 - 1)))/c8 + (SERc_4*v13)/c8 - (SERg_4*v16)/c8 + (SERp_4*v9)/c8 - (200*GLYg_2*MTHFg_2*v2)/(c8*(v2 - 1))
+(PGg_5*v7)/c8 - (SERg_5*(v1 - (200*v2)/(v2 - 1)))/c8 + (SERc_5*v13)/c8 - (SERg_5*v16)/c8 + (SERp_5*v9)/c8 - (200*GLYg_3*MTHFg_1*v2)/(c8*(v2 - 1))
+(PGg_6*v7)/c8 - (SERg_6*(v1 - (200*v2)/(v2 - 1)))/c8 + (SERc_6*v13)/c8 - (SERg_6*v16)/c8 + (SERp_6*v9)/c8 - (200*GLYg_3*MTHFg_2*v2)/(c8*(v2 - 1))
+(PGg_7*v7)/c8 - (SERg_7*(v1 - (200*v2)/(v2 - 1)))/c8 + (SERc_7*v13)/c8 - (SERg_7*v16)/c8 + (SERp_7*v9)/c8 - (200*GLYg_4*MTHFg_1*v2)/(c8*(v2 - 1))
+(PGg_8*v7)/c8 - (SERg_8*(v1 - (200*v2)/(v2 - 1)))/c8 + (SERc_8*v13)/c8 - (SERg_8*v16)/c8 + (SERp_8*v9)/c8 - (200*GLYg_4*MTHFg_2*v2)/(c8*(v2 - 1))
+SERp
+0
+0
+0
+0
+0
+0
+0
+0

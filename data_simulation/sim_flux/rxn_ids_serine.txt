@@ -1,0 +1,21 @@
+SERg == GLYg + MTHFg
+SERg == GLYg + MTHFg
+SERc == GLYc + MTHFc
+SERc == GLYc + MTHFc
+PGig == PGg
+PGic == PGc
+PGg == SERg
+PGc == SERc
+SERp == SERg
+SERp == SERc
+SERu == SERg
+SERu == SERc
+SERc == SERg
+GLYg == MTHFg + CO2
+GLYc == MTHFc + CO2
+SERg == 0
+SERc == 0
+MTHFg == 0
+GLYg == 0
+MTHFc == 0
+GLYc == 0

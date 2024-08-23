@@ -1,0 +1,34 @@
+GLYa
+v11*(SERa1 + SERa2) - GLYa1*v13 - GLYa1*v18 - GLYa1*v12
+v11*(SERa3 + SERa4) - GLYa2*v13 - GLYa2*v18 - GLYa2*v12
+v11*(SERa5 + SERa6) - GLYa3*v13 - GLYa3*v18 - GLYa3*v12
+v11*(SERa7 + SERa8) - GLYa4*v13 - GLYa4*v18 - GLYa4*v12
+GLYg
+v5*(SERg1 + SERg2) - GLYg1*v7 - GLYg1*v15 - GLYg1*v6
+v5*(SERg3 + SERg4) - GLYg2*v7 - GLYg2*v15 - GLYg2*v6
+v5*(SERg5 + SERg6) - GLYg3*v7 - GLYg3*v15 - GLYg3*v6
+v5*(SERg7 + SERg8) - GLYg4*v7 - GLYg4*v15 - GLYg4*v6
+METHFa
+v11*(SERa1 + SERa3 + SERa5 + SERa7) - METHFa1*v19 - METHFa1*v12 + v13*(GLYa1 + GLYa3)
+v11*(SERa2 + SERa4 + SERa6 + SERa8) - METHFa2*v19 - METHFa2*v12 + v13*(GLYa2 + GLYa4)
+METHFg
+v5*(SERg1 + SERg3 + SERg5 + SERg7) - METHFg1*v16 - METHFg1*v6 + v7*(GLYg1 + GLYg3)
+v5*(SERg2 + SERg4 + SERg6 + SERg8) - METHFg2*v16 - METHFg2*v6 + v7*(GLYg2 + GLYg4)
+SERa
+v10 + PGa1*v9 - SERa1*v3 - SERa1*v11 - SERa1*v17 + SERx1*v8 + GLYa1*METHFa1*v12
+PGa2*v9 - SERa2*v3 - SERa2*v11 - SERa2*v17 + SERx2*v8 + GLYa1*METHFa2*v12
+PGa3*v9 - SERa3*v3 - SERa3*v11 - SERa3*v17 + SERx3*v8 + GLYa2*METHFa1*v12
+PGa4*v9 - SERa4*v3 - SERa4*v11 - SERa4*v17 + SERx4*v8 + GLYa2*METHFa2*v12
+PGa5*v9 - SERa5*v3 - SERa5*v11 - SERa5*v17 + SERx5*v8 + GLYa3*METHFa1*v12
+PGa6*v9 - SERa6*v3 - SERa6*v11 - SERa6*v17 + SERx6*v8 + GLYa3*METHFa2*v12
+PGa7*v9 - SERa7*v3 - SERa7*v11 - SERa7*v17 + SERx7*v8 + GLYa4*METHFa1*v12
+PGa8*v9 - SERa8*v3 - SERa8*v11 - SERa8*v17 + SERx8*v8 + GLYa4*METHFa2*v12
+SERg
+v4 + PGg1*v2 + SERa1*v3 - SERg1*v5 - SERg1*v14 + SERx1*v1 + GLYg1*METHFg1*v6
+PGg2*v2 + SERa2*v3 - SERg2*v5 - SERg2*v14 + SERx2*v1 + GLYg1*METHFg2*v6
+PGg3*v2 + SERa3*v3 - SERg3*v5 - SERg3*v14 + SERx3*v1 + GLYg2*METHFg1*v6
+PGg4*v2 + SERa4*v3 - SERg4*v5 - SERg4*v14 + SERx4*v1 + GLYg2*METHFg2*v6
+PGg5*v2 + SERa5*v3 - SERg5*v5 - SERg5*v14 + SERx5*v1 + GLYg3*METHFg1*v6
+PGg6*v2 + SERa6*v3 - SERg6*v5 - SERg6*v14 + SERx6*v1 + GLYg3*METHFg2*v6
+PGg7*v2 + SERa7*v3 - SERg7*v5 - SERg7*v14 + SERx7*v1 + GLYg4*METHFg1*v6
+PGg8*v2 + SERa8*v3 - SERg8*v5 - SERg8*v14 + SERx8*v1 + GLYg4*METHFg2*v6

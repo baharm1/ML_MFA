@@ -1,0 +1,11 @@
+	0
+run_time	3326.519058942795
+compoundBalance_g	1.5
+negativeFlux_g	1
+cellVar_g	1
+moduleVar_g	0.01
+n_modules	12
+n_cells	1200
+n_batches	1200
+n_epochs	3480
+sc_imputation	True

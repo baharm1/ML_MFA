@@ -1,0 +1,9 @@
+{
+    "data_dir": "./data",
+    "res_dir": "./output",
+    "module_gene_file": "module_gene_serine.csv",
+    "stoichiometry_matrix": "cmMat_serine.csv",
+	"compound_name_file": "cName_serine.csv",
+	"gene_exp": "three_comp_scRNA.csv",
+	"cellname_types": "cellnames_types.txt"
+}

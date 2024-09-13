@@ -1,8 +1,17 @@
-# Quantifying Cellular Metabolic, Circulating, and Microenvironmental Exchange Fluxes from Gene Expression and Bulk <sup>13</sup>C-Metabolomics
+# Quantifying Cellular Metabolic, Circulating, and Microenvironmental Exchange Fluxes from Gene Expression and Bulk <sup>13</sup>C-Enrichment Patterns
 
 By integrating scRNA-seq data with mass isotopologue distribution (MID) of cortex, tumor, and circulating metabolites, <sup>13</sup>C-scMFA quantifies metabolic fluxes, circulating, and microenvironmental exchange fluxes for each cell. Based on the location of cells, whether they belong to normal or tumor tissues, bulk MIDs are assigned to each cell. MIDs of microenvironment-derived metabolites are assumed to be similar to those of the tissues that secrete the metabolites. These secretion or uptake fluxes have been defined in modified scFEA analysis. Circulating metabolite MIDs help distinguish between the two exchange fluxes: microenvironment-derived metabolite exchange between cell types and circulating metabolite uptake. The intra- and intercellular fluxes are balanced in each cell and in the tumor microenvironment, similar to modified scFEA. Furthermore, fluxes are adjusted such that the accumulation of isotopologues in cells and tissues is minimized. Here, two examples of using <sup>13</sup>C-scMFA are shown for serine and purine metabolism. Please refer to our manuscript for more information about the methods.
 
 ## Requirements
+* Python 3.11 for <sup>13</sup>C-scMFA analysis: We recommend installing [Anaconda](https://www.anaconda.com/download) and creating a new conda environment to manage the versioning of dependencies:
+```
+conda create -n scMFA python=3.11.8
+conda activate scMFA
+```
+To run Python codes, the following packages have to be installed:
+```
+pip install -r requirements.txt
+```
 
 * MATLAB R2021b for estimation of 5,10-methylenetetrahydrofolate (MTHF) MIDs with the following package:
 	* Artelys Knitro software 12.4
@@ -24,7 +33,7 @@ By integrating scRNA-seq data with mass isotopologue distribution (MID) of corte
 1. Input data prep: The scRNA-seq and <sup>13</sup>C-isotope tracing data were prepared for <sup>13</sup>C-scMFA. These data can be found in `patient_input_serine` and `patient_input_purine`.
 	* We collected percent enrichment of isotopologues for input and balanced metabolites in `patient_MID` folder.
 	* Preparation of input scRNA-seq data to align with <sup>13</sup>C-scMFA is provided in `prep_input_data_scMFA.R`. By running this script, normalized block diagonal scRNA-seq data for each patient and cell types are saved in `patient_scRNA` and `patient_celltypes`.
-1. Running <sup>13</sup>C-scMFA: The input arguments of the model are provided to the model via a JSON file (serine_13C_scMFA_config.json for serine, purine_13C_scMFA_config.json for the purine model), which includes the directories required for the `13C_scMFA.py` to run:
+1. Create config file: The input arguments of the model are provided to the model via a JSON file (serine_13C_scMFA_config.json for serine, purine_13C_scMFA_config.json for the purine model), which includes the directories required for the `13C_scMFA.py` to run:
 	* `model_name`: Name of the metabolic model (serine or purine)
 	* `model_dir`: Directory of the metabolic model
 	* `patient_dir`: Directory of patient data, including patient MIDs (percent enrichment), patient scRNA-seq data in the form of a block diagonal gene expression matrix constructed in `prep_input_data_serine_scMFA.R`, and cell types assigned to cell IDs in patient scRNA-seq data. These subdirectories are as follows: `patient_MID`, `patient_scRNA`, and `patient_celltypes`.
@@ -36,7 +45,15 @@ By integrating scRNA-seq data with mass isotopologue distribution (MID) of corte
 	* `isotopologue_name_file`: Filename of balanced isotopologue names in `model_dir`
 	* `n_mids`: Number of balanced isotopologues for a balanced metabolite
 	* `n_balanced_metabs`: Number of balanced metabolites in a cell
-1. Visualizing <sup>13</sup>C-scMFA estimated fluxes: `visualize_scMFA_output.R` generates Fig. 6B-F, Extended Fig. 12, 13, Fig. 7B, C, Extended Fig. 15 C-J.
+	The information in the JSON file can be also found in the help function:
+	```
+	python 13C_scMFA.py --help
+	```
+1. Run <sup>13</sup>C-scMFA: The only input argument is a JSON file which is set to serine model configuration file `serine_13C_scMFA_config.json', by default. To Run 13C_scMFA.py with other config files:
+	```
+	python 13C_scMFA.py --config_file purine_13C_scMFA_config.json
+	```
+1. Visualize <sup>13</sup>C-scMFA estimated fluxes: `visualize_scMFA_output.R` generates Fig. 6B-F, Extended Fig. 12, 13, Fig. 7B, C, Extended Fig. 15 C-J.
 
 #### Metabolite balances
 

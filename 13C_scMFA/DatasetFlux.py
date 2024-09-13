@@ -1,10 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-@author: wnchang pulled y1zhou
-"""
-
 from torch.utils.data import Dataset
-
 
 class MyDataset(Dataset):
     def __init__(self, geneExpr, geneExprScale, module_scale, transform=None):

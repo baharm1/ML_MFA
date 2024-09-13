@@ -1,13 +1,14 @@
-
 # Simulation of fluxes and MIDs
 
-Due to the limitation of <sup>13</sup>C-metabolomics data of HGG patients and the uncertainties around quantifying metabolic fluxes in patients, training a digital twin framework on actual patient data is not feasible. Here, we employ flux balance analysis (FBA) and mass isotopomer/isotopologue balance analysis at isotopic unsteady state (INST-MFA) to generate thousands of synthetic patient data instances. We verify that the simulated MIDs are representative of actual patient MIDs. Then, the simulated MIDs and fluxes are used as input features and targets, respectively, in the metabolic CNN model for training, validating, and testing the model.
+Due to limited patient <sup>13</sup>C-isotope tracing data and the uncertainties around quantifying metabolic fluxes in patients, training a digital twin framework on actual patient data is not feasible. Here, we employ flux balance analysis (FBA) and mass isotopomer/isotopologue balance analysis at isotopic unsteady state (INST-MFA) to generate thousands of synthetic patient data instances. We verify that the simulated MIDs are representative of actual patient MIDs. Then, the simulated MIDs and fluxes are used as input features and targets, respectively, in the metabolic CNN model for training, validating, and testing the model.
 
 Here, we show MID and flux simulations for two pathways: serine metabolism and purine metabolism. Furthermore, to evaluate the simulated MIDs and fluxes, the simulated MIDs are compared to the experimental MIDs.
 
 ## Requirements
 
-MATLAB R2021b with the Parallel Processing Toolkit was used to simulate MIDs and fluxes. To visualize the simulated MIDs and fluxes, R version 4.2.2 and the following R packages were used:
+MATLAB R2021b with the Parallel Processing Toolkit was used to simulate MIDs and fluxes. 
+
+To visualize the simulated MIDs and fluxes, R version 4.2.2 and the following R packages were used:
 
 * ggplot2 3.4.2
 * stringr 1.5.0
@@ -19,15 +20,15 @@ MATLAB R2021b with the Parallel Processing Toolkit was used to simulate MIDs and
 
 ## User-defined Inputs for MID and Flux Simulation
 
-* `isotopomer_model`: An Excel file containing the list of reactions, types of reactions, carbon transitions, number of carbons in metabolites, input and sink metabolites, and unlabeled metabolites.
-* `isotopologue_model`: An Excel file containing the list of reactions, types of reactions, and input metabolites.
-* `param_bound_file`: An Excel file containing the list of reactions, and the lower and upper bounds of fluxes and balanced metabolite pools.
-* `F`: Scaling factor for exchange flux based on Wiechert's bidirectional modeling.
-* `n_sim`: Number of flux sets or simulations.
-* `tspan`: Time period for MID simulation with a specified time step.
-* Lower and upper bounds for input metabolite MIDs.
-* Source fluxes of a target metabolite.
-* Target flux. 
+* `isotopomer_model`: An Excel file containing the list of reactions, types of reactions, carbon transitions, number of carbons in metabolites, input and sink metabolites, and unlabeled metabolites
+* `isotopologue_model`: An Excel file containing the list of reactions, types of reactions, and input metabolites
+* `param_bound_file`: An Excel file containing the list of reactions, and the lower and upper bounds of fluxes and balanced metabolite pools
+* `F`: Scaling factor for exchange flux based on Wiechert's bidirectional modeling
+* `n_sim`: Number of flux sets or simulations
+* `tspan`: Time period for MID simulation with a specified time step
+* Lower and upper bounds for input metabolite MIDs
+* Source fluxes of a target metabolite
+* Target flux
 
 ### Isotopomer Model
 

@@ -3,6 +3,11 @@
 By integrating scRNA-seq data with mass isotopologue distribution (MID) of cortex, tumor, and circulating metabolites, <sup>13</sup>C-scMFA quantifies metabolic fluxes, circulating, and microenvironmental exchange fluxes for each cell. Based on the location of cells, whether they belong to normal or tumor tissues, bulk MIDs are assigned to each cell. MIDs of microenvironment-derived metabolites are assumed to be similar to those of the tissues that secrete the metabolites. These secretion or uptake fluxes have been defined in modified scFEA analysis. Circulating metabolite MIDs help distinguish between the two exchange fluxes: microenvironment-derived metabolite exchange between cell types and circulating metabolite uptake. The intra- and intercellular fluxes are balanced in each cell and in the tumor microenvironment, similar to modified scFEA. Furthermore, fluxes are adjusted such that the accumulation of isotopologues in cells and tissues is minimized. Here, two examples of using <sup>13</sup>C-scMFA are shown for serine and purine metabolism. Please refer to our manuscript for more information about the methods.
 
 ## Requirements
+Download <sup>13</sup>C-scMFA from GitHub:
+```
+git clone https://github.com/baharm1/ML_MFA
+```
+
 * Python 3.11 for <sup>13</sup>C-scMFA analysis: We recommend installing [Anaconda](https://www.anaconda.com/download) and creating a new conda environment to manage the versioning of dependencies:
 ```
 conda create -n scMFA python=3.11.8
@@ -11,6 +16,8 @@ conda activate scMFA
 To run Python codes, the following packages have to be installed:
 ```
 pip install -r requirements.txt
+pip install --user magic-impute==3.0.0
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 ```
 
 * MATLAB R2021b for estimation of 5,10-methylenetetrahydrofolate (MTHF) MIDs with the following package:
@@ -45,6 +52,7 @@ pip install -r requirements.txt
 	* `isotopologue_name_file`: Filename of balanced isotopologue names in `model_dir`
 	* `n_mids`: Number of balanced isotopologues for a balanced metabolite
 	* `n_balanced_metabs`: Number of balanced metabolites in a cell
+	
 	The information in the JSON file can be also found in the help function:
 	```
 	python 13C_scMFA.py --help

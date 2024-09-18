@@ -48,6 +48,15 @@ GPU-enabled workstation with NVIDIA Quadro P2200
 matplotlib
 3.7.2
 
+optuna
+3.1.0
+
+plotly
+5.15.0
+
+joblib
+1.3.0
+
 scipy
 1.10.1
 

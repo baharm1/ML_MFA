@@ -1,4 +1,4 @@
-# Proprocess scRNA-seq dataset from Darmanis et al., Cell Reports 2017
+# Preprocess scRNA-seq dataset from Darmanis et al., Cell Reports 2017
 
 # Import Libraries ------------------------------------------------------------
 library(Seurat)

@@ -1,18 +1,31 @@
-# Development and Validation of Digital Twin Approaches to Quantify Metabolic Fluxes in Human Cancers
+# Digital twins for _in vivo_ metabolic flux estimation in brain cancer patients
 
-The practicalities of conducting stable isotope infusions during clinical tumor resections typically necessitate non-steady state conditions and single time-point measurements. Hence, traditional MFA techniques cannot be used to measure metabolic fluxes as they require multiple time point isotope enrichment data under isotopic unsteady state conditions. To address this challenge, we introduce a digital twin approach, leveraging scRNA-seq (`single_cell_analysis`) and _in vivo_ <sup>13</sup>C-metabolic enrichment data from glioma patients [1] to generate simulated enrichment data (`data_simulation`). This data is then used to train a convolutional neural network (CNN) to estimate _in vivo_ metabolic fluxes (`metabolic_CNN`). scRNA-seq data allows for the estimation of metabolic interactions within the TME (`single_cell_metabolic_interaction_analysis`), providing information to the metabolic model on the existence of secretion/uptake fluxes. 
+The codes related to our manuscript **"Digital twins for _in vivo_ metabolic flux estimation in brain cancer patients"** can be found in this repository.
 
-<p align="center">
-  <img width="80%" src="https://github.com/baharm1/ML_MFA/blob/main/readme_figs/Fig1_schematic_git.png">
-</p>
+We organized the codes into following folders and provided a detailed description for using the codes in each folder. Please click on the links below to see the codes and README files.
 
-First, we employed flux balance analysis (FBA) and mass isotopomer/isotopologue balance analysis at isotopic unsteady state to generate thousands of synthetic patient data instances (`data_simulation`). These instances feed into a CNN framework (`metabolic_CNN`). A metabolic model is curated based on experimental data and current literature [1][2] with user-defined flux boundaries. Fluxes are initialized within the defined bounds and balanced by stoichiometric coefficients (`data_simulation`). The bounds are chosen to encompass the measured patient mass isotopologue distributions (MIDs). To simulate MIDs at various time points, we consider a set of fluxes, metabolite concentrations, and MIDs of input metabolites in a set of non-steady state isotopic ordinary differential equations (ODEs) to determine the MIDs of balanced metabolites (`data_simulation`). To verify the accuracy of our simulated MIDs, we need to establish that they are representative of actual patient MIDs. This verification is done in two steps. First, the range of the simulated MIDs should align with that of the MIDs observed in patients, ensuring that our simulation parameters can capture the variability seen in clinical scenarios. Second, the projection of patient MIDs into the space of simulated MIDs should demonstrate that actual patient data fits within the simulated space, signifying that our model can potentially cover all realistic MID scenarios observed in clinical practice. Demonstrating that the simulated data are analogous to and inclusive of patient MIDs reinforces confidence in the model's applicability (`data_simulation`). The targets, or predictions, are the relative values of fluxes contributing to the production of a metabolite (_e.g._, metabolite Z) from various sources (metabolites W, X, Y). These relative values, derived from FBA calculations, serve as ground truth in a supervised regression task. 
+1. [Single-cell RNA-seq analysis](https://github.com/baharm1/ML_MFA/blob/main/single_cell_analysis)
 
-CNN is designed to predict these relative fluxes from the enrichment patterns of metabolites at different time points. For internal validation of this methodology, we withheld a portion of the simulated data from the model in training. After training, we assessed CNN’s performance on this unseen test data (`metabolic_CNN`). The CNN model's validity can be tested experimentally through patient-derived xenograft (PDX) models. Depending on the hypothesis and the CNN's outcomes—which identify a dominant source of metabolite Z production—an experimental strategy can be designed. This experiment would involve targeting the identified source in PDX models to determine its essentiality for tumor viability. If inhibition of the dominant source results in reduced tumor growth or viability in the PDX models, it would lend support to the CNN's predictive accuracy and underscore the metabolic pathway's potential as a therapeutic target (`metabolic_CNN`). 
+2. [Single-cell metabolic interaction analysis](https://github.com/baharm1/ML_MFA/blob/main/single_cell_metabolic_interaction_analysis)
 
-The CNN model can also be validated by correlating its predicted relative metabolic fluxes with the fluxes estimated at the single-cell level. The scRNA-seq data, by providing transcript levels of genes encoding enzymes responsible for catalyzing metabolic reactions, offers insights into the metabolic activity in individual cells. Higher expression levels of certain genes within specific cell types may indicate increased flux through the corresponding reactions. The single-cell analysis further reveals the heterogeneity and complex interactions among various cell types within the TME. These interactions can be incorporated into computational models to estimate intra- and intercellular fluxes, thereby providing a more nuanced view of tumor metabolism (`modified_scFEA`). By concurrently analyzing bulk MIDs and scRNA-seq data, we added an additional dimension—the metabolite enrichment patterns—to the information obtained from scRNA-seq. Our integrative approach (`13C-scMFA`), combining insights from scFBA and traditional MFA, enhances the overall understanding of cellular metabolism within the tumor. An integrated analysis of this nature allows for an independent and robust validation of the CNN model by comparing CNN predicted relative fluxes with metabolic flux estimates derived from <sup>13</sup>C-scMFA. If there is a strong correlation between the two sets of flux estimates, it would further substantiate the predictive power of the CNN model in capturing the true metabolic behavior of glioma cells. Taken together, we leverage combined 13C-glucose isotope tracing and scRNA-seq data from patients with glioma to establish a digital twin framework that quantified metabolic pathway activities/fluxes in glioma patients, providing personalized insights into potential treatment strategies.
+3. [Modified scFEA: Quantification of exchange fluxes using scRNA-seq data](https://github.com/baharm1/ML_MFA/blob/main/modified_scFEA)
 
-## References
-[1] Scott, A. J. et al. Rewiring of cortical glucose metabolism fuels human brain cancer growth. medRxiv (2023).
+4. [<sup>13</sup>C-scMFA: Quantification of intra- and intercellular fluxes using integrated scRNA-seq and <sup>13</sup>C-enrichment data](https://github.com/baharm1/ML_MFA/blob/main/13C_scMFA)
 
-[2] Kanehisa, M. & Goto, S. KEGG: Kyoto Encyclopedia of Genes and Genomes. Nucleic Acids Res 28, 27-30 (2000). 
+5. [Development of patient digital twins: Simulation of fluxes and <sup>13</sup>C-enrichment data](https://github.com/baharm1/ML_MFA/blob/main/data_simulation)
+
+6. [Metabolic CNN: Estimation of relative anabolic fluxes in bulk tissues](https://github.com/baharm1/ML_MFA/blob/main/metabolic_CNN)
+
+7. [Informed MFA: Metabolic flux analysis informed by CNN-predicted fluxes](https://github.com/baharm1/ML_MFA/blob/main/informed_MFA)
+
+### Requirements:
+1. MATLAB R2021b with default installation on Windows 11
+2. [Artelys Knitro Optimizer version 12.4](https://www.artelys.com/solvers/knitro/) (MATLAB version)
+3. MATLAB Parallel Processing toolkit (optional)
+4. R version 4.2.2
+5. Python version 3.8 and 3.11
+
+More detailed requirements can be found in each folder.
+
+## Citation
+Meghdadi B. _et al._ Digital twins for _in vivo_ metabolic flux estimation in brain cancer patients. _Cell Metabolism_ (2025). 

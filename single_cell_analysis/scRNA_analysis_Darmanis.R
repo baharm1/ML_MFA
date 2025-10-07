@@ -3,13 +3,7 @@
 # Import Libraries ------------------------------------------------------------
 library(Seurat)
 library(dplyr)
-library(scCustomize)
 library(ggplot2)
-library(Rmagic)
-library(RColorBrewer)
-library(pheatmap)
-library(ggpubr)
-library(cowplot)
 library(tidyr)
 library(patchwork)
 library(reshape2)

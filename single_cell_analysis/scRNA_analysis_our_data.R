@@ -6,7 +6,6 @@ library(Matrix)
 library(ggplot2)
 library(dplyr)
 library(DoubletFinder)
-library(parallel)
 library(Polychrome)
 library(scCustomize)
 library(patchwork)
@@ -16,9 +15,9 @@ library(harmony)
 library(GSEABase)
 
 # Directories -----------------------------------------------------------------
-directory = '/nfs/turbo/umms-wna/baharan/reanalysis/'
-fig_directory = '/nfs/turbo/umms-wna/baharan/reanalysis/figs'
-seurat_directory = '/nfs/turbo/umms-wna/baharan/reanalysis/seu_obj'
+directory = './baharan/reanalysis/'
+fig_directory = './baharan/reanalysis/figs'
+seurat_directory = './baharan/reanalysis/seu_obj'
 
 # Plot Functions --------------------------------------------------------------
 qc_visualization <- function(data, thr_umi, thr_gene, thr_mito, thr_ribo){

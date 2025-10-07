@@ -7,7 +7,8 @@ This jupyter notebook requires three input files, as follows:
 * `counts_darmanis.h5`: log-normalized reads with scale factor of 10,000 which is equivalent to data slot of a Seurat object
 * `metadata_damanis.csv`: a dataframe with number of cells rows and attributes as columns including cell types
 * `mebocost.conf`: a configuration file which refers to `my_config_files` for metabolic model 
-The normalized counts and metadata of Darmanis dataset were saved previously by running `../single_cell_analysis/scRNA_analysis_Darmanis.R`. The plots are saved in `darmanis_MEBOCOST_output` folder.
+
+Normalized counts and metadata of Darmanis dataset were saved previously by running `../single_cell_analysis/scRNA_analysis_Darmanis.R`. The plots are saved in `darmanis_MEBOCOST_output` folder.
 
 Calculation of MAS can be found in `calc_metabolite_accumulation_score_serine.R`. This code requires a preprocessed Seurat object, herein, Darmanis scRNA-seq data.
 

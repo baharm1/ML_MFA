@@ -3,7 +3,7 @@
 We modified the single-cell flux estimation analysis algorithm[1] ([scFEA](https://github.com/changwn/scFEA)) to quantify cellular serine metabolic reaction and serine exchange fluxes within the tumor microenvironment (TME) by minimizing the accumulation of serine in cells and TME.
 
 ## Requirements
-The requirements to run `modified_scFEA.py` are similar to <sup>13</sup>C-scMFA.
+The requirements to run `modified_scFEA.py` are similar to [<sup>13</sup>C-scMFA](https://github.com/baharm1/ML_MFA/blob/main/13C_scMFA).
 
 ## Usage
 

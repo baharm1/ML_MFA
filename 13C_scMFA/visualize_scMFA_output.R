@@ -1,4 +1,4 @@
-# Visualize output of serine 13C-scMFA
+# Visualize output of 13C-scMFA
 
 # Import Libraries ------------------------------------------------------------
 library(ggplot2)
@@ -6,23 +6,11 @@ library(ggpubr)
 library(dplyr)
 library(introdataviz)
 library(tidyr)
-library(pheatmap)
 
 # Serine model ----------------------------------------------------------------
 ## Visualize output of scMFA for each patient ----------------------------------
 ### Read single cell fluxes ----
 flux_file = 'P1N_3c_scRNA_fg_20240531-152149'
-flux = read.csv(file = paste('./output_serine/', 
-                             flux_file, '.csv', sep = ''), 
-                row.names = 1)
-
-### Heatmap shows a block diagonal matrix of fluxes for various cell types ----
-flux = as.matrix(flux)
-pdf(file = paste(flux_file, 'pheatmap_sep_rxn.pdf', sep = '_'), 
-    width = 5, height = 10)
-pheatmap(flux, cluster_rows = F, cluster_cols = F, show_rownames = F)
-dev.off()
-
 
 flux = read.csv(file = paste('./output_serine/', 
                              flux_file, '.csv', sep = ''), 
@@ -60,13 +48,6 @@ flux = add_com_flux(flux, 'SER_tran', 'SERa_SERs', 'SERs_SERg', 'SERs_SERn')
 flux = add_com_flux(flux, 'SER_GLY', 'SERa_GLYa', 'SERg_GLYg', 'SERn_GLYn')
 flux = add_com_flux(flux, 'SERu_SER', 'SER0_SERa', 'SER0_SERg', 'SER0_SERn')
 flux = add_com_flux(flux, 'SERp_SER', 'SERp_SERa', 'SERp_SERg', 'SERp_SERn')
-
-### Heatmap of dense scflux matrix ----
-pflux = flux[c('PG_SER', 'SERp_SER', 'SER_tran', 'SERu_SER', "SER_out", "SER_GLY")]
-pflux = as.matrix(pflux)
-pdf(file = paste(flux_file, 'pheatmap_com_rxn.pdf', sep = '_'), width = 2, height = 10)
-pheatmap(pflux, cluster_rows = F, cluster_cols = F, show_rownames = F)
-dev.off()
 
 ### violin plots of single cell fluxes of cell types ----
 # compare scfluxes between cell types

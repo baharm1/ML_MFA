@@ -1,0 +1,18 @@
+{
+    "model_name": "serine",
+	"model_dir": "serine_model_mouse",
+	"input_data_dir": "GBM12_GBM38_HF2303_input_serine",
+    "output_dir": "./output_serine_mouse",
+    "module_gene_file": "module_gene_serine.csv",
+    "stoichiometry_matrix": "cmMat_serine.csv",
+	"isotopologue_matrix": "mmMat_serine.csv",
+	"compound_name_file": "cName_serine.csv",
+	"isotopologue_name_file": "mName_serine.csv",
+	"n_mids": 3,
+	"n_balanced_metabs": 1,
+	"la1_comp_bal": 1,
+    "la2_non_neg": 1,
+    "la3_cell_var": 1,
+    "la4_mid_bal": 1,
+    "la5_mid_bulk": 1
+}

@@ -28,16 +28,9 @@ pd.options.mode.chained_assignment = None  # default='warn'
 # hyper parameters
 LEARN_RATE = 0.008
 
-LAMB_BA_gene = 1
-LAMB_NG_gene = 1
-LAMB_CELL_gene = 1
-LAMB_MOD_gene = 1
-LAMB_BA_mid = 1
-
 def myLoss(
     gene_flux, compound_acc_gene, isotopologue_acc, penalized_mid_bal,
-    cellnames_types, geneScale, config_dict,
-    lamb1=1, lamb2=1, lamb3=1, lamb4=1, lamb5=1):
+    cellnames_types, geneScale, config_dict):
 
     # flux balance equations, no accumaltion of compounds in cells
     celltype_counts = cellnames_types['cell_type'].value_counts()
@@ -51,6 +44,11 @@ def myLoss(
     
     n_mids = config_dict["n_mids"]  
     n_metabs = config_dict["n_balanced_metabs"]
+    lamb1 = config_dict["la1_comp_bal"]
+    lamb2 = config_dict["la2_non_neg"]
+    lamb3 = config_dict["la3_cell_var"]
+    lamb4 = config_dict["la4_mid_bal"]
+    lamb5 = config_dict["la5_mid_bulk"]
     
     if config_dict['model_name'] == 'serine':
         SERsecretion_gene = (torch.sum(gene_flux[:, 3]) / 
@@ -84,14 +82,14 @@ def myLoss(
                                                                    n_metabs]) / 
                                         celltype_counts['Neoplastic'], 2)  
     
-    # non-negative constrain
+    # non-negative constraint
     error = torch.abs(gene_flux) - gene_flux
     total2 = torch.sum(error, dim = 1)
     
-    # sample-wise variation constrain
+    # cell-wise variation constraint
     total3 = torch.pow(torch.sum(gene_flux, dim = 1) - geneScale, 2) 
     
-    # module variation
+    # MID accumaltion
     total4 = torch.pow(penalized_mid_bal, 2)
     total4 = torch.sum(total4, dim = 1)
 
@@ -382,12 +380,7 @@ def main(args: argparse.Namespace):
                     out_mg_batch, out_cg_batch, out_ig_batch, out_mid_batch,
                     cellnames_types, 
                     geneScale = X_scale_batch,
-                    config_dict = config_dict,
-                    lamb1 = LAMB_BA_gene,
-                    lamb2 = LAMB_NG_gene,
-                    lamb3 = LAMB_CELL_gene,
-                    lamb4 = LAMB_MOD_gene,
-                    lamb5 = LAMB_BA_mid)
+                    config_dict = config_dict)
         
                 optimizer.zero_grad() # reset the gradients to 0
                 loss_batch.backward() # perform a backward pass
@@ -437,11 +430,11 @@ def main(args: argparse.Namespace):
         imgName = res_dir / f"loss_{timestr}.pdf"
         plt.savefig(imgName, format = 'pdf')
         plt.close()
-        
+    
         model_params = pd.DataFrame(
-            {'run_time': end - start, 'compoundBalance_g': LAMB_BA_gene, 
-             'negativeFlux_g': LAMB_NG_gene, 'cellVar_g': LAMB_CELL_gene,
-             'moduleVar_g': LAMB_MOD_gene, 'isotoplogueBalance_g': LAMB_BA_mid, 
+            {'run_time': end - start, 'compoundBalance_g': config_dict["la1_comp_bal"], 
+             'negativeFlux_g': config_dict["la2_non_neg"], 'cellVar_g': config_dict["la3_cell_var"],
+             'moduleVar_g': config_dict["la4_mid_bal"], 'isotoplogueBalance_g': config_dict["la5_mid_bulk"], 
              'n_modules': n_modules, 'n_metabs': n_metabs, 'n_mids': n_mids, 
              'n_cells': n_cells, 'n_batches': BATCH_SIZE, 'n_epochs': epoch,
              'sc_imputation': sc_imputation}, index = [0]).T
@@ -486,7 +479,7 @@ def main(args: argparse.Namespace):
         
         print("13C-scMFA job finished successfully.")
         
-        return
+    return
 
 
 def parse_arguments(parser: argparse.ArgumentParser):
@@ -498,7 +491,7 @@ def parse_arguments(parser: argparse.ArgumentParser):
         help = "Input arguments of the model are provided in a JSON file which contains the following information: \n"
         "model_name: Name of the metabolic model (serine or purine) \n"
 	    "model_dir: Directory of the metabolic model \n"
-	    "patient_dir: Directory of patient data, including patient MIDs (percent enrichment), patient scRNA-seq data in the form of a block diagonal gene expression matrix constructed in prep_input_data_serine_scMFA.R, and cell types assigned to cell IDs in patient scRNA-seq data. These subdirectories are as follows: patient_MID, patient_scRNA, and patient_celltypes. \n"
+	    "patient_dir: Directory of patient data, including patient MIDs (percent enrichment), scRNA-seq data in the form of a block diagonal gene expression matrix constructed in prep_input_data_scMFA.R, and cell types assigned to cell IDs in scRNA-seq data. These subdirectories are as follows: patient_MID, patient_scRNA, and patient_celltypes. \n"
 	    "output_dir: Directory of <sup>13</sup>C-scMFA output files \n"
 	    "module_gene_file: Filename of genes associated with metabolic reactions in model_dir \n"
 	    "stoichiometry_matrix: Filename of metabolite balances in model_dir \n"
@@ -507,6 +500,11 @@ def parse_arguments(parser: argparse.ArgumentParser):
 	    "isotopologue_name_file: Filename of balanced isotopologue names in model_dir \n"
 	    "n_mids: Number of balanced isotopologues for a balanced metabolite \n"
 	    "n_balanced_metabs: Number of balanced metabolites in a cell \n"
+        "la1_comp_bal: Hyperparameter to adjust accumulation of metabolites \n"
+        "la2_non_neg: Hyperparameter to adjust negative fluxes \n" 
+        "la3_cell_var: Hyperparameter to adjust single cell flux variation \n"
+        "la4_mid_bal: Hyperparameter to adjust accumulation of MIDs in cells \n"
+        "la5_mid_bulk: Hyperparameter to adjust accumulation of MIDs in tissues \n"
         "Please see the default JSON file as an example."
     )
     

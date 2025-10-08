@@ -1,0 +1,18 @@
+{
+    "model_name": "purine",
+	"model_dir": "purine_model",
+	"input_data_dir": "TRP_GBM38_input_purine",
+    "output_dir": "./output_purine_mouse",
+    "module_gene_file": "module_gene_purine.csv",
+    "stoichiometry_matrix": "cmMat_purine.csv",
+	"isotopologue_matrix": "mmMat_purine.csv",
+	"compound_name_file": "cName_purine.csv",
+	"isotopologue_name_file": "mName_purine.csv",
+	"n_mids": 6,
+	"n_balanced_metabs": 6,
+	"la1_comp_bal": 0.1,
+    "la2_non_neg": 1,
+    "la3_cell_var": 0.1,
+    "la4_mid_bal": 1,
+    "la5_mid_bulk": 1
+}

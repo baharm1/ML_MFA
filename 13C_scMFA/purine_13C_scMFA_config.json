@@ -9,5 +9,10 @@
 	"compound_name_file": "cName_purine.csv",
 	"isotopologue_name_file": "mName_purine.csv",
 	"n_mids": 6,
-	"n_balanced_metabs": 6
+	"n_balanced_metabs": 6,
+	"la1_comp_bal": 1,
+    "la2_non_neg": 1,
+    "la3_cell_var": 1,
+    "la4_mid_bal": 1,
+    "la5_mid_bulk": 1
 }

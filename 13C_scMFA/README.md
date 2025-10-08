@@ -28,6 +28,10 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 	* ggplot2 3.4.2
 	* RColorBrewer 1.1-3
 	* scCustomize 1.0.0
+	* stringr 1.5.0
+	* ggpubr 0.4.0
+	* introdataviz 0.0.0.9003
+	* tidyr 1.3.0
 
 ## Usage
 
@@ -43,7 +47,7 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 1. Create config file: The input arguments of the model are provided to the model via a JSON file (serine_13C_scMFA_config.json for serine, purine_13C_scMFA_config.json for the purine model), which includes the directories required for the `13C_scMFA.py` to run:
 	* `model_name`: Name of the metabolic model (serine or purine)
 	* `model_dir`: Directory of the metabolic model
-	* `patient_dir`: Directory of patient data, including patient MIDs (percent enrichment), patient scRNA-seq data in the form of a block diagonal gene expression matrix constructed in `prep_input_data_serine_scMFA.R`, and cell types assigned to cell IDs in patient scRNA-seq data. These subdirectories are as follows: `patient_MID`, `patient_scRNA`, and `patient_celltypes`.
+	* `patient_dir`: Directory of patient data, including patient MIDs (percent enrichment), patient scRNA-seq data in the form of a block diagonal gene expression matrix constructed in `prep_input_data_scMFA.R`, and cell types assigned to cell IDs in patient scRNA-seq data. These subdirectories are as follows: `patient_MID`, `patient_scRNA`, and `patient_celltypes`.
 	* `output_dir`: Directory of <sup>13</sup>C-scMFA output files
 	* `module_gene_file`: Filename of genes associated with metabolic reactions in `model_dir`
 	* `stoichiometry_matrix`: Filename of metabolite balances in `model_dir`
@@ -52,16 +56,26 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 	* `isotopologue_name_file`: Filename of balanced isotopologue names in `model_dir`
 	* `n_mids`: Number of balanced isotopologues for a balanced metabolite
 	* `n_balanced_metabs`: Number of balanced metabolites in a cell
+	* `la1_comp_bal`: Hyperparameter to adjust accumulation of metabolites
+	* `la2_non_neg`: Hyperparameter to adjust negative fluxes
+	* `la3_cell_var`: Hyperparameter to adjust single cell flux variation
+	* `la4_mid_bal`: Hyperparameter to adjust accumulation of MIDs in cells
+	* `la5_mid_bulk: Hyperparameter to adjust accumulation of MIDs in tissues
 	
 	The information in the JSON file can be also found in the help function:
 	```
 	python 13C_scMFA.py --help
 	```
-1. Run <sup>13</sup>C-scMFA: The only input argument is a JSON file which is set to serine model configuration file `serine_13C_scMFA_config.json', by default. To Run 13C_scMFA.py with other config files:
+1. Run <sup>13</sup>C-scMFA: The only input argument is a JSON file which is set to serine model configuration file `serine_13C_scMFA_config.json`, by default. To Run 13C_scMFA.py with other config files:
 	```
 	python 13C_scMFA.py --config_file purine_13C_scMFA_config.json
 	```
-1. Visualize <sup>13</sup>C-scMFA estimated fluxes: `visualize_scMFA_output.R` generates Fig. 6B-F, Extended Fig. 12, 13, Fig. 7B, C, Extended Fig. 15 C-J.
+1. Validation of <sup>13</sup>C-scMFA using mouse models: We used GBM12, GBM38, and HF2303-bearing mice to validate our serine model, and GBM38 and TRP models to validate our purine model. The script related to mouse models is `13C_scMFA_mouse.py`. The input data are prepared in `prep_input_data_scMFA_mouse.R` Mouse serine model includes invading neoplastic cells in addition to other cell types defined in the patient model. The default JSON file for this script is `serine_13C_scMFA_mouse_config.json`. Please check the JSON config file to see input model and data details. To run other config files:
+	```
+	python 13C_scMFA_mouse.py --config_file purine_13C_scMFA_mouse_config.json
+	```
+1. Visualize <sup>13</sup>C-scMFA estimated fluxes: `visualize_scMFA_output.R` and `visualize_scMFA_output_mouse.R` generate Figure 5J-L, 6J-M, 7C-E, S5F-G, S6E, S7B-I,M.
+ 
 
 #### Metabolite balances
 

@@ -1,0 +1,9 @@
+PGa1,0,0,neg_SERa1,0,0,neg_SERa1,0,0,neg_SERa1,0,0,0,0,0,SERp1,0,0
+PGa2,0,0,neg_SERa2,0,0,neg_SERa2,0,0,neg_SERa2,0,0,0,0,0,SERp2,0,0
+PGa3,0,0,neg_SERa3,0,0,neg_SERa3,0,0,neg_SERa3,0,0,0,0,0,SERp3,0,0
+0,PGn1,0,0,SERa1,0,0,neg_SERn1,0,0,neg_SERn1,0,0,0,0,0,SERp1,0
+0,PGn2,0,0,SERa2,0,0,neg_SERn2,0,0,neg_SERn2,0,0,0,0,0,SERp2,0
+0,PGn3,0,0,SERa3,0,0,neg_SERn3,0,0,neg_SERn3,0,0,0,0,0,SERp3,0
+0,0,PGg1,0,0,SERa1,0,0,neg_SERg1,0,0,neg_SERg1,0,0,0,0,0,SERp1
+0,0,PGg2,0,0,SERa2,0,0,neg_SERg2,0,0,neg_SERg2,0,0,0,0,0,SERp2
+0,0,PGg3,0,0,SERa3,0,0,neg_SERg3,0,0,neg_SERg3,0,0,0,0,0,SERp3

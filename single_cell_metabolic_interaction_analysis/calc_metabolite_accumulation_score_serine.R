@@ -2,20 +2,11 @@
 # scRNA-seq dataset from Darmanis et al., Cell Reports 2017
 
 # Import Libraries ------------------------------------------------------------
-library(Seurat)
-library(dplyr)
-library(scCustomize)
-library(ggplot2)
-library(Rmagic)
-library(RColorBrewer)
-library(pheatmap)
-library(ggpubr)
-library(cowplot)
-library(tidyr)
-library(patchwork)
-library(reshape2)
-library(Polychrome)  
-library(scales)
+library(Seurat) # version 4.2.0
+library(scCustomize) # version 1.0.0
+library(ggplot2) # version 3.4.2
+library(Rmagic) # version 2.0.3
+library(RColorBrewer) # version 1.1-3
 
 # Read Darmanis dataset -------------------------------------------------------
 # Load preprocessed data saved in scRNA_analysis_Darmanis.R

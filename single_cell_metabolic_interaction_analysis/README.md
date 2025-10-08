@@ -11,7 +11,7 @@ This jupyter notebook requires three input files, as follows:
 Normalized counts and metadata of Darmanis dataset were saved previously by running `../single_cell_analysis/scRNA_analysis_Darmanis.R`. The plots are saved in `darmanis_MEBOCOST_output` folder.
 
 Calculation of MAS can be found in `calc_metabolite_accumulation_score_serine.R`. This code requires a preprocessed Seurat object, herein, Darmanis scRNA-seq data.
-`MEBOCOST_connectivity.R` visualizes number of metabolic connections between cell type as shown in Figure S2E. Requirements of each code can be found in the scripts.
+`MEBOCOST_connectivity.R` visualizes number of metabolic connections between cell types as shown in Figure S2E. Requirements of each code can be found in the scripts.
 
 ## References
 [1] Darmanis, S. et al. Single-Cell RNA-Seq Analysis of Infiltrating Neoplastic Cells at the Migrating Front of Human Glioblastoma. Cell Reports 21, 1399-1410 (2017). [doi: 10.1016/j.celrep.2017.10.030](https://doi.org:10.1016/j.celrep.2017.10.030)

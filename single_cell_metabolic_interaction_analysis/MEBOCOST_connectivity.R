@@ -1,5 +1,5 @@
 # MEBOCOST metabolite connectivity between cells
-
+# R 4.2.2
 library(ggplot2) # version 3.4.2
 
 commu_df = read.csv(file = './darmanis_MEBOCOST_output/commu_df.csv',

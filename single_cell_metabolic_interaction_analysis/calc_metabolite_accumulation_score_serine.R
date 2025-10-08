@@ -2,6 +2,7 @@
 # scRNA-seq dataset from Darmanis et al., Cell Reports 2017
 
 # Import Libraries ------------------------------------------------------------
+# R 4.2.2
 library(Seurat) # version 4.2.0
 library(scCustomize) # version 1.0.0
 library(ggplot2) # version 3.4.2

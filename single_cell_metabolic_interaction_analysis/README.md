@@ -8,7 +8,7 @@ This jupyter notebook requires three input files, as follows:
 * `metadata_damanis.csv`: a dataframe with number of cells rows and attributes as columns including cell types
 * `mebocost.conf`: a configuration file which refers to `my_config_files` for metabolic model 
 
-Normalized counts and metadata of Darmanis dataset were saved previously by running `../single_cell_analysis/scRNA_analysis_Darmanis.R`. The plots are saved in `darmanis_MEBOCOST_output` folder.
+Normalized counts and metadata of Darmanis dataset were saved previously by running `../single_cell_analysis/scRNA_analysis_Darmanis.R`. The plots are saved in `darmanis_MEBOCOST_output` folder. In `my_config_files`, we provide a comherensive list of serine transporters and reactions.
 
 Calculation of MAS can be found in `calc_metabolite_accumulation_score_serine.R`. This code requires a preprocessed Seurat object, herein, Darmanis scRNA-seq data.
 `MEBOCOST_connectivity.R` visualizes number of metabolic connections between cell types as shown in Figure S2E. Requirements of each code can be found in the scripts.

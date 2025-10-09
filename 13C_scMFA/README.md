@@ -1,4 +1,4 @@
-# Quantifying Cellular Metabolic, Circulating, and Microenvironmental Exchange Fluxes from Gene Expression and Bulk <sup>13</sup>C-Enrichment Patterns
+# <sup>13</sup>C-scMFA: Quantification of intra- and intercellular fluxes using integrated scRNA-seq and <sup>13</sup>C-enrichment data
 
 By integrating scRNA-seq data with mass isotopologue distribution (MID) of cortex, tumor, and circulating metabolites, <sup>13</sup>C-scMFA quantifies metabolic fluxes, circulating, and microenvironmental exchange fluxes for each cell. Based on the location of cells, whether they belong to normal or tumor tissues, bulk MIDs are assigned to each cell. MIDs of microenvironment-derived metabolites are assumed to be similar to those of the tissues that secrete the metabolites. These secretion or uptake fluxes have been defined in modified scFEA analysis. Circulating metabolite MIDs help distinguish between the two exchange fluxes: microenvironment-derived metabolite exchange between cell types and circulating metabolite uptake. The intra- and intercellular fluxes are balanced in each cell and in the tumor microenvironment, similar to modified scFEA. Furthermore, fluxes are adjusted such that the accumulation of isotopologues in cells and tissues is minimized. Here, two examples of using <sup>13</sup>C-scMFA are shown for serine and purine metabolism. Please refer to our manuscript for more information about the methods.
 
@@ -21,7 +21,8 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 ```
 
 * MATLAB R2021b for estimation of 5,10-methylenetetrahydrofolate (MTHF) MIDs with the following package:
-	* Artelys Knitro software 12.4
+	* [Artelys Knitro Optimizer version 12.4](https://www.artelys.com/solvers/knitro/)
+	* MATLAB Parallel Processing toolkit (optional)
 * R 4.2.2 for visualization and data preparation with the following packages:
 	* Seurat 4.2.0
 	* dplyr 1.1.2
@@ -60,7 +61,7 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 	* `la2_non_neg`: Hyperparameter to adjust negative fluxes
 	* `la3_cell_var`: Hyperparameter to adjust single cell flux variation
 	* `la4_mid_bal`: Hyperparameter to adjust accumulation of MIDs in cells
-	* `la5_mid_bulk: Hyperparameter to adjust accumulation of MIDs in tissues
+	* `la5_mid_bulk`: Hyperparameter to adjust accumulation of MIDs in tissues
 	
 	The information in the JSON file can be also found in the help function:
 	```
@@ -83,5 +84,5 @@ Metabolite balances provided as a CSV file in `stoichiometry_matrix` are stoichi
 
 #### Isotopologue balances
 
-Isotopologue balances are provided as a CSV file in `isotopologue_matrix` with a shape of the number of MIDs of balanced metabolites by the number of fluxes. This matrix includes coefficients of fluxes in isotopologue balance equations. If a metabolite is consumed in a reaction, the isotopologue coefficient is prefixed with a `neg_` string to denote the negative sign. In purine model, labeled substrates of de novo IMP synthesis are one ribose 5-phosphate, one glycine, and two MTHF. We estimated MTHF enrichment from serine and glycine enrichment data since MTHF enrichment was not available for our patients. We calculated multiplication of isotoplogues of substrates of de novo (denoted by DN in patient MID files) IMP synthesis in `patient_input_purine/MTHF_estimation/denovo_IMP_MID.xlsx`. Please refer to our manuscript for more details.
+Isotopologue balances are provided as a CSV file in `isotopologue_matrix` with a shape of the number of MIDs of balanced metabolites by the number of fluxes. This matrix includes coefficients of fluxes in isotopologue balance equations. If a metabolite is consumed in a reaction, the isotopologue coefficient is prefixed with a `neg_` string to denote the negative sign. In purine model, labeled substrates of de novo IMP synthesis are one ribose 5-phosphate, one glycine, and two MTHF. We estimated MTHF enrichment from serine and glycine enrichment data since MTHF enrichment was not available for our patients. We calculated multiplication of isotoplogues of substrates of _de novo_ (denoted by DN in patient MID files) IMP synthesis in `./MTHF_estimation/denovo_IMP_MID.xlsx`. Please refer to our manuscript for more details.
 

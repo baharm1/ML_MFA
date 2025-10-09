@@ -32,6 +32,10 @@ We organized the codes into following folders and provided a detailed descriptio
 
 6. [Metabolic CNN: Estimation of relative anabolic fluxes in bulk tissues](https://github.com/baharm1/ML_MFA/blob/main/metabolic_CNN)
 
+<p align="center">
+	<img width="40%" src="https://github.com/baharm1/ML_MFA/blob/main/readme_figs/metabolic_CNN.png">
+</p>
+
 7. [Informed MFA: Metabolic flux analysis informed by CNN-predicted fluxes](https://github.com/baharm1/ML_MFA/blob/main/informed_MFA)
 
 ### Requirements:

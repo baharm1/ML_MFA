@@ -15,7 +15,7 @@ We organized the codes into following folders and provided a detailed descriptio
 3. [Modified scFEA: Quantification of exchange fluxes using scRNA-seq data](https://github.com/baharm1/ML_MFA/blob/main/modified_scFEA)
 
 <p align="center">
-	<img width="80%" src="https://github.com/baharm1/ML_MFA/blob/main/readme_figs/modified_scFEA.png">
+	<img width="50%" src="https://github.com/baharm1/ML_MFA/blob/main/readme_figs/modified_scFEA.png">
 </p>
 
 4. [<sup>13</sup>C-scMFA: Quantification of intra- and intercellular fluxes using integrated scRNA-seq and <sup>13</sup>C-enrichment data](https://github.com/baharm1/ML_MFA/blob/main/13C_scMFA)

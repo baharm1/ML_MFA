@@ -26,6 +26,10 @@ We organized the codes into following folders and provided a detailed descriptio
 
 5. [Development of patient digital twins: Simulation of fluxes and <sup>13</sup>C-enrichment data](https://github.com/baharm1/ML_MFA/blob/main/data_simulation)
 
+<p align="center">
+	<img width="100%" src="https://github.com/baharm1/ML_MFA/blob/main/readme_figs/data_simulation.png">
+</p>
+
 6. [Metabolic CNN: Estimation of relative anabolic fluxes in bulk tissues](https://github.com/baharm1/ML_MFA/blob/main/metabolic_CNN)
 
 7. [Informed MFA: Metabolic flux analysis informed by CNN-predicted fluxes](https://github.com/baharm1/ML_MFA/blob/main/informed_MFA)

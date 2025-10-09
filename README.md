@@ -8,9 +8,21 @@ We organized the codes into following folders and provided a detailed descriptio
 
 2. [Single-cell metabolic interaction analysis](https://github.com/baharm1/ML_MFA/blob/main/single_cell_metabolic_interaction_analysis)
 
+<p align="center">
+	<img width="80%" src="https://github.com/baharm1/ML_MFA/blob/main/readme_figs/metabolic_interaction.png">
+</p>
+
 3. [Modified scFEA: Quantification of exchange fluxes using scRNA-seq data](https://github.com/baharm1/ML_MFA/blob/main/modified_scFEA)
 
+<p align="center">
+	<img width="80%" src="https://github.com/baharm1/ML_MFA/blob/main/readme_figs/modified_scFEA.png">
+</p>
+
 4. [<sup>13</sup>C-scMFA: Quantification of intra- and intercellular fluxes using integrated scRNA-seq and <sup>13</sup>C-enrichment data](https://github.com/baharm1/ML_MFA/blob/main/13C_scMFA)
+
+<p align="center">
+	<img width="80%" src="https://github.com/baharm1/ML_MFA/blob/main/readme_figs/13C_scMFA.png">
+</p>
 
 5. [Development of patient digital twins: Simulation of fluxes and <sup>13</sup>C-enrichment data](https://github.com/baharm1/ML_MFA/blob/main/data_simulation)
 

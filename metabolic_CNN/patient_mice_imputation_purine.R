@@ -169,3 +169,62 @@ for (i in 1:20){
             file = paste(names(mice_mid)[i],
                          'mice_purine_gbm_2405_1e4_rm0_100.csv', sep = '_'))
 }
+
+## GBM38 TRP
+
+sim_mid = readRDS('./data/sim_data/sim_gbm_purine_mid_v5_1e4_rm0_100_sct.rds')
+
+# mice MIDs
+mice_dir = './data/mice_data/mice_mid_mc_purine/'
+mice_files = list.files(path = mice_dir)
+mid_names = read.delim('./data/mice_data/mid_name_mice_purine_v2.txt', 
+                       sep = '\t', header = F)
+
+mice_mid = c()
+for (ps in 1:length(mice_files)){
+  
+  mid_mc_ps = read.delim(paste(mice_dir, 
+                               mice_files[ps], sep = ''), 
+                         header = F, quote = '')
+  colnames(mid_mc_ps) = mid_names$V1
+  rownames(mid_mc_ps) = paste(substr(mice_files[ps], 1, nchar(mice_files[ps]) - 27), 
+                              seq(1, dim(mid_mc_ps)[1]), sep = '_')
+  
+  mid_mc_ps = mid_mc_ps[, !colnames(mid_mc_ps) %in% c('ser0', 'r5p0', 
+                                                      'IMP0', 'GMP0', 'GDP0',
+                                                      'INO0', 'GUO0', 'AMP0')]
+  
+  mice_mid = c(mice_mid, list(mid_mc_ps))
+}
+names(mice_mid) = substr(mice_files, 1, nchar(mice_files) - 27)
+mice_mid_v = dplyr::bind_rows(mice_mid)
+
+mice_mid_v = mice_mid_v * 100
+mice_mid_v = data.matrix(mice_mid_v)
+mice_mid_v = t(mice_mid_v)
+
+mice_mid_v = CreateSeuratObject(counts = mice_mid_v, project = 'mice_mid_mc')
+
+saveRDS(mice_mid_v, 'sim_mice_mid_mc_2405_sct.rds')
+
+mice_mid_v = SCTransform(mice_mid_v) %>% RunPCA()
+anchors = FindTransferAnchors(reference = sim_mid, 
+                              query = mice_mid_v, 
+                              normalization.method = "SCT")
+
+predictions.assay = TransferData(anchorset = anchors, 
+                                 refdata = GetAssayData(sim_mid[['RNA']]),
+                                 prediction.assay = T,
+                                 weight.reduction = mice_mid_v[["pca"]],
+                                 dims = 1:30)
+
+pred_mice_assay = as.data.frame(t(as.matrix(predictions.assay@data)))
+
+for (i in 1:2){ #20
+  f = (i - 1) * 100 + 1
+  e = i * 100
+  write.csv(pred_mice_assay[f:e, ], row.names = T, quote = F,
+            file = paste(names(mice_mid)[i],
+                         'purine_gbm_imputed.csv', sep = '_'))
+}
+

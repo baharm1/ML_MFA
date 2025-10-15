@@ -205,7 +205,7 @@ mid_cortex_v = mid_cortex[, !(colnames(mid_cortex) %in% c('index', 'time'))]
 
 ## Read patient MIDs sampled from a truncated normal distribution ----
 
-patient_dir = '../metabolic_CNN/data/patient_data/patient_truncated_norm_samples_serine'
+patient_dir = '../metabolic_CNN/data/patient_data/patient_mid_mc_serine'
 patient_files = list.files(path = patient_dir)
 
 mid_names = read.delim('../metabolic_CNN/data/patient_data/mid_name_patient_serine.txt', 
@@ -642,7 +642,7 @@ mid = subset(mid, time >= 2, select = colnames(mid))
 mid_v = mid[, !(colnames(mid) %in% c('index', 'time'))]
 
 ## Read patient MIDs sampled from a truncated normal distribution ----
-patient_dir = '../metabolic_CNN/data/patient_data/patient_truncated_norm_samples_purine'
+patient_dir = '../metabolic_CNN/data/patient_data/patient_mid_mc_purine_glioma'
 patient_files = list.files(path = patient_dir)
 mid_names = read.delim('../metabolic_CNN/data/patient_data/mid_name_patient_purine.txt', 
                        sep = '\t', header = F)

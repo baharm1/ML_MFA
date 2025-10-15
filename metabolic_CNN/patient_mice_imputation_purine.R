@@ -7,14 +7,14 @@ library(stringr)
 # imputation ------------------------------------------------------------------
 
 ## Read purine simulated MIDs ----
-mid = read.csv(file = paste('../metabolic_CNN/data/sim_data/', 
-                            'simulated_data_gmp_denovo_glioma.csv', 
+mid = read.csv(file = paste('./data/sim_data/', 
+                            'simulated_data_gmp_denovo_glioma_1e4.csv', 
                             sep = ''), header = T, quote = '')
 
 
 ## Read simulation parameters including serine and R5P ----
-param_mid = read.csv(file =  paste('../metabolic_CNN/data/sim_data/', 
-                                   'simulation_parameters_gmp_denovo_glioma.csv', 
+param_mid = read.csv(file =  paste('./data/sim_data/', 
+                                   'simulation_parameters_gmp_denovo_glioma_1e4.csv', 
                                    sep = ''), header = T, quote = '')
 
 param_mid[['index']] = seq(1, dim(param_mid)[1])
@@ -48,9 +48,9 @@ mid = subset(mid, time >= 2, select = colnames(mid))
 mid_v = mid[, !(colnames(mid) %in% c('index', 'time'))]
 
 ## Read patient MIDs sampled from a truncated normal distribution ----
-patient_dir = '../metabolic_CNN/data/patient_data/patient_truncated_norm_samples_purine'
+patient_dir = './data/patient_data/patient_mid_mc_purine_glioma'
 patient_files = list.files(path = patient_dir)
-mid_names = read.delim('../metabolic_CNN/data/patient_data/mid_name_patient_purine.txt', 
+mid_names = read.delim('./data/patient_data/mid_name_patient_purine.txt', 
                        sep = '\t', header = F)
 
 ## Combine simulated mids with patient mids ----
@@ -110,13 +110,13 @@ for (i in 1:15){
                          'patient_purine_gbm_2405_1e4_rm0_100.csv', sep = '_'))
 }
 
-saveRDS(sim_mid, 'sim_glioma_purine_mid_v5_1e4_rm0_100_sct.rds')
+saveRDS(sim_mid, 'sim_gbm_purine_mid_v5_1e4_rm0_100_sct.rds')
 saveRDS(patient_mid, 'sim_patient_purine_mid_mc_sct.rds')
 
-## Read MMF-treated mice MIDs sampled from a truncated normal distribution ----
-mice_dir = '../metabolic_CNN/data/mice_data/mice_mmf_truncated_norm_samples_purine'
+## MMF-treated mice MIDs sampled from a truncated normal distribution ----
+mice_dir = './data/mice_data/mice_mmf_mid_mc_purine_glioma'
 mice_files = list.files(path = mice_dir)
-mid_names = read.delim('../metabolic_CNN/data/mice_data/mid_name_mice_purine.txt', 
+mid_names = read.delim('./data/mice_data/mid_name_mice_purine.txt', 
                        sep = '\t', header = F)
 
 mice_mid = c()
@@ -170,14 +170,14 @@ for (i in 1:20){
                          'mice_purine_gbm_2405_1e4_rm0_100.csv', sep = '_'))
 }
 
-## GBM38 TRP
+## GBM38 and TRP MIDs sampled from a truncated normal distribution ----
 
 sim_mid = readRDS('./data/sim_data/sim_gbm_purine_mid_v5_1e4_rm0_100_sct.rds')
 
 # mice MIDs
 mice_dir = './data/mice_data/mice_mid_mc_purine/'
 mice_files = list.files(path = mice_dir)
-mid_names = read.delim('./data/mice_data/mid_name_mice_purine_v2.txt', 
+mid_names = read.delim('./data/mice_data/mid_name_mice_purine.txt', 
                        sep = '\t', header = F)
 
 mice_mid = c()
@@ -190,7 +190,7 @@ for (ps in 1:length(mice_files)){
   rownames(mid_mc_ps) = paste(substr(mice_files[ps], 1, nchar(mice_files[ps]) - 27), 
                               seq(1, dim(mid_mc_ps)[1]), sep = '_')
   
-  mid_mc_ps = mid_mc_ps[, !colnames(mid_mc_ps) %in% c('ser0', 'r5p0', 
+  mid_mc_ps = mid_mc_ps[, !colnames(mid_mc_ps) %in% c('SER0', 'R5P0', 
                                                       'IMP0', 'GMP0', 'GDP0',
                                                       'INO0', 'GUO0', 'AMP0')]
   

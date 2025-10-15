@@ -1,6 +1,6 @@
 {
     "model_dir": "./gmp_denovo_glioma_config_20240517_1138",
-    "mice_dir": "./data/mice_data/TRP_GBM38_imputed_mid_purine",
+    "mice_dir": "./data/mice_data/TRP_GBM38_imputed_mid_purine_glioma",
     "mice_mid_name": "./data/mice_data/mid_name_mice_purine.txt",
 	"mice_time": 4,
 	"patient_dir": "",

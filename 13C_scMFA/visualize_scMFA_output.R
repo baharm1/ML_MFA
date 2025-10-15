@@ -407,6 +407,7 @@ stats_ser_gly_ser_cons = compare_means(data = sub_in_long,
 write.csv(stats_ser_gly_ser_cons, file = "stats_ser_gly_ser_cons_wilcox_holm.csv")
 
 ## Correlation of 13C-scMFA estimated fluxes with CNN predicted fluxes ---------
+# Figure 5K
 scMFA_dir = "./output_serine"
 patient_scMFA = c(
   'P1E_3c_scRNA_fg_20240508-164955',
@@ -426,7 +427,7 @@ for (ps in 1:length(patient_scMFA)){
   # previous sections
   mal_mean = read.delim(file = paste(scMFA_dir, '/',
                                      patient_scMFA[ps], 
-                                     '_Neoplastic_mean.txt', 
+                                     '_neoplastic_mean.txt', 
                                      sep = ''), sep = ' ',
                         quote = '', row.names = 1, header = T)  
   neo_flux = c(neo_flux, list(mal_mean[c(1, 2, 3), ]))
@@ -441,22 +442,22 @@ neo_flux_normalized = sweep(neo_flux_df, 2, colSums(neo_flux_df),`/`)
 neo_flux_normalized = data.frame(t(neo_flux_normalized))
 
 # Directory of CNN predicted serine fluxes in patients
-ML_pred_dir = "../metabolic_CNN/combined_patient_pred_serine_CNN/"
+ML_pred_dir = "../metabolic_CNN/all_patients_pred_serine_CNN/"
 
-glioma_denovo = read.delim(file = paste(ML_pred_dir, 'ML_denovo_combined_1327_2102.txt', 
+glioma_denovo = read.delim(file = paste(ML_pred_dir, 'pred_denovo_glioma_20240408_1327.txt', 
                                         sep = ''), 
                            header = T, sep = '\t')
 
-glioma_plasma = read.delim(file = paste(ML_pred_dir, 'ML_plasma_combined_1327_2102.txt', 
+glioma_plasma = read.delim(file = paste(ML_pred_dir, 'pred_plasma_glioma_20240408_2102.txt', 
                                         sep = ''), 
                            header = T, sep = '\t')
-glioma_tme = read.delim(file = paste(ML_pred_dir, 'ML_tme_combined_1327_2102.txt', 
+glioma_tme = read.delim(file = paste(ML_pred_dir, 'pred_tme_glioma_20240408_1327_2102.txt', 
                                      sep = ''), 
                         header = T, sep = '\t')
-cortex_denovo = read.delim(file = paste(ML_pred_dir, 'ML_denovo_cortex_1615.txt', 
+cortex_denovo = read.delim(file = paste(ML_pred_dir, 'pred_denovo_cortex_20240508_1220.txt', 
                                         sep = ''), 
                            header = T, sep = '\t')
-cortex_plasma = read.delim(file = paste(ML_pred_dir, 'ML_plasma_cortex_1615.txt', 
+cortex_plasma = read.delim(file = paste(ML_pred_dir, 'pred_plasma_cortex_20240508_1220.txt', 
                                         sep = ''), 
                            header = T, sep = '\t')
 
@@ -532,6 +533,115 @@ p = ggscatter(tme_g, x = "tme_ML", y = "tme_scMFA", color = "patient",
 ggsave(filename = 'scatter_tme_ML_scMFA_glioma.pdf', 
        plot = p, device = 'pdf', width = 5, height = 5.5, units = 'in')
 
+## Correlation of PHGDH, PSAT1, PSPH expression with ratio of SER M+3/PG M+3 ----
+# Figure S5F
+patient_folders = list.files(path = "../metabolic_CNN/data/patient_data/patient_mid_mc_serine/",
+                            recursive = F)
+mid_names = read.delim(file = "../metabolic_CNN/data/patient_data/mid_name_patient_serine.txt", 
+                       header = F, sep = '\t')
+
+patient_sites = c('P1E', 'P1N', 'P2E', 'P2N', 'P3E', 'P3N', 'P4E', 'P4N',
+                  'P5E', 'P5N', 'P6E', 'P6N', 'P7E', 'P7N', 'P8N')
+
+ratio_M3 = data.frame(matrix(nrow = 100, ncol = 0))
+
+for (ps in 1:length(patient_folders)){
+  patient_mids = read.delim(file = paste("../metabolic_CNN/data/patient_data/patient_mid_mc_serine/",
+                                         patient_folders[ps], 
+                                         sep = ''), 
+                            header = F, sep = '\t')
+  
+  colnames(patient_mids) = mid_names$V1
+  
+  ratio_M3[[patient_sites[ps]]] = patient_mids$SER3 / patient_mids$PG3
+  
+}
+
+mean_M3 = colMeans(ratio_M3)
+scaled_mean_M3 = scale(mean_M3)
+
+available_scrna = scaled_mean_M3[c('P1E', 'P1N', 'P2E', 'P4E', 'P4N', 
+                                   'P6E', 'P6N', 'P7E', 'P7N', 'P8N'), ]
+
+gbm = readRDS('../../scRNAseq_data_deposition/gbm_w_metadata.rds')
+levels(gbm)
+
+gbm = AddMetaData(gbm, paste(gbm$patient, gbm$site, sep="_"), col.name = 'patient_site')
+# replace PSAT1 with PHGDH and PSPH to generate other plots
+gene_name = 'PSAT1'
+p = DotPlot(gbm, features = gene_name, 
+            idents = c("AC-like", "NPC-like", "OPC-like", "MES-like", "CellCycle"), 
+            group.by = 'patient_site')
+
+scdata = data.frame(patient_scid = as.character(p$data$id), gene_exp = p$data$avg.exp.scaled)
+scdata[scdata$patient_scid == '6473SS_NonEnhancing', 'patient_scid'] = 'P8N'
+scdata[scdata$patient_scid == '6369SS_NonEnhancing', 'patient_scid'] = 'P7N'
+scdata[scdata$patient_scid == '6369SS_Enhancing', 'patient_scid'] = 'P7E'
+scdata[scdata$patient_scid == '6025SS_NonEnhancing', 'patient_scid'] = 'P6N'
+scdata[scdata$patient_scid == '6025SS_Enhancing', 'patient_scid'] = 'P6E'
+scdata[scdata$patient_scid == '5675SS_NonEnhancing', 'patient_scid'] = 'P4N'
+scdata[scdata$patient_scid == '5675SS_Enhancing', 'patient_scid'] = 'P4E'
+scdata[scdata$patient_scid == '5363SR_Enhancing', 'patient_scid'] = 'P2E'
+scdata[scdata$patient_scid == '4554DH_NonEnhancing', 'patient_scid'] = 'P1N'
+scdata[scdata$patient_scid == '4554DH_Enhancing', 'patient_scid'] = 'P1E'
+rownames(scdata) = scdata$patient_scid
+sorted_scdata = scdata[names(available_scrna),]
+
+gene_M3 = data.frame(gene_exp = sorted_scdata$gene_exp, 
+                     ratio_M3 = available_scrna,
+                     patient = names(available_scrna),
+                     row.names = names(available_scrna))
+
+library("ggpubr")
+p = ggscatter(gene_M3, x = "gene_exp", y = "ratio_M3", color = "patient",
+              add = "reg.line", conf.int = TRUE, 
+              cor.coef = TRUE, cor.method = "pearson",
+              xlab = gene_name, ylab = "SERg3/PGg3",
+              label = "patient") +
+  geom_smooth(method = "lm", color = "black") 
+
+ggsave(filename = paste('scatter_', gene_name, '_serM3_PG3.pdf', sep = ''),
+       plot = p, device = 'pdf', width = 5, height = 5.5, units = 'in')
+write.table(p$data, file = paste(gene_name, '_serM3_PGM3.txt', sep = ''), 
+            sep = "\t")
+
+## cBioPortal PanCancer ICGC/TCGA IDH-mutant vs IDH-wt glioma ----
+# Figure 5H
+shmt1_exp = read.delim('ICGC_TCGA_SHMT1_IDH1_mut_vs_wt.txt', header = T, 
+                       sep = '\t')
+shmt2_exp = read.delim('ICGC_TCGA_SHMT2_IDH1_mut_vs_wt.txt', header = T, 
+                       sep = '\t')
+
+colnames(shmt1_exp) = c('sample', 'IDH1_mut', 'exp', 'mutation')
+colnames(shmt2_exp) = c('sample', 'IDH1_mut', 'exp', 'mutation')
+
+shmt1_exp[['gene']] = 'SHMT1'
+shmt2_exp[['gene']] = 'SHMT2'
+
+shmt_exp = bind_rows(shmt1_exp, shmt2_exp)
+
+stat_shmt1 = compare_means(data = shmt1_exp, 
+                           formula = exp ~ IDH1_mut, 
+                           method = 't.test',
+                           p.adjust.method = 'bonf')
+
+stat_shmt2 = compare_means(data = shmt2_exp, 
+                           formula = exp ~ IDH1_mut, 
+                           method = 't.test',
+                           p.adjust.method = 'bonf')
+stat_shmt1
+stat_shmt2
+
+p = ggplot(shmt1_exp, aes(x = gene, y = exp, fill = IDH1_mut)) +
+  geom_boxplot(position = position_dodge(0.8), alpha = 0.6)+
+  geom_dotplot(binaxis = 'y', stackdir = 'center', dotsize = 0.5,
+               position = position_dodge(0.8),
+               binwidth = 1) +
+  stat_summary(fun=mean, geom="point", size=1, shape = 4, color="black") +
+  theme_classic()
+
+ggsave(filename = 'TCGA_shmt1_IDH1.pdf', 
+       plot = p, device = 'pdf', width = 4, height = 5, units = 'in')
 
 # Purine model ----
 ## Visualize output of scMFA for each patient ---------------------------------
@@ -683,8 +793,8 @@ for (ps in 1:length(patient_flux_files)){
   mean_myeloid_fluxes = apply(flux_myeloid, 2, mean)
   mean_neoplastic_fluxes = apply(flux_neoplastic, 2, mean)
   
-  write.table(mean_myeloid_fluxes, paste(flux_file, 'myeloid_mean.txt'))
-  write.table(mean_neoplastic_fluxes, paste(flux_file, 'neoplastic_mean.txt'))
+  write.table(mean_myeloid_fluxes, paste(flux_file, 'myeloid_mean.txt', sep = ''))
+  write.table(mean_neoplastic_fluxes, paste(flux_file, '_neoplastic_mean.txt', sep = ''))
 }  
 
 

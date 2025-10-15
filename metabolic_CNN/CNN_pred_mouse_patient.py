@@ -111,7 +111,7 @@ def main(args: argparse.Namespace):
     
     #%% Step 3: Predict relative target flux in patients
     if config_dict['patient_dir'] != '':
-        patient_files = os.listdir()
+        patient_files = os.listdir(config_dict['patient_dir'])
         patient_mid_names = pd.read_csv(config_dict['patient_mid_name'], 
                                     sep = '\t', header = None)
         
@@ -130,10 +130,14 @@ def main(args: argparse.Namespace):
         
         for ps in range(len(patient_files)):
             mid_mc_dir = "".join([config_dict['patient_dir'], '/', patient_files[ps]])
-            mid_mc = pd.read_csv(mid_mc_dir, sep = ',', header = 0, index_col = 0)
+            if mid_mc_dir[-3:] == 'csv':
+                mid_mc = pd.read_csv(mid_mc_dir, sep = ',', header = 0, index_col = 0)
+                mid_mc = mid_mc / 100
+            elif mid_mc_dir[-3:] == 'txt':
+                mid_mc = pd.read_csv(mid_mc_dir, sep = '\t', header = None)
+                
             mid_mc.columns = patient_mid_names[0]
             mid_mc = mid_mc[keep_col_data]
-            mid_mc = mid_mc / 100
             
             if hypo_mids != '':
                 for i in range(len(hypo_mids)):

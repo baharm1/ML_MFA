@@ -12,7 +12,7 @@ library(ggpubr)
 
 # Plot CNN-predicted relative de novo GMP synthesis flux MMF-treated mice ----
 
-mice_pred_dir = './gmp_denovo_glioma_config_20240517_1138/mice_pred_gmp_denovo_glioma_config'
+mice_pred_dir = './gmp_denovo_glioma_config_20240517_1138/mice_mmf_pred_gmp_denovo_glioma'
 mice_pred_files = list.files(path = mice_pred_dir)
 
 list_mice_pred = c()
@@ -199,3 +199,94 @@ pairwise.t.test(ReplicateAverages$value, ReplicateAverages$treatment,
 summary(a1)
 TukeyHSD(a1)
 
+# GBM12, GBM38, HF2303 --------------------------------------------------------
+mouse_pred_dir  = './serine_plasma_glioma_config_20240408_2102/mice_pred_serine_plasma_glioma/'
+pred_nat_rev = list.files(path = mouse_pred_dir, recursive = T)
+mouse_pred = list()
+
+for (i in pred_nat_rev){
+  mouse_file = read.delim(file = paste(mouse_pred_dir, i, sep = ''), 
+                          header = T, quote = "")
+  mouse_cond = substr(i, 17, nchar(i) - 11)
+  mouse_pred[[mouse_cond]] = mouse_file$pred_serine_plasma_glioma_config_mice_nat_rev
+  
+}
+mouse_pred = as.data.frame(mouse_pred)
+
+mouse_df = data.frame('sample' = c(rep('GBM12', 200), rep('GBM38', 200), 
+                                       rep('HF2303', 200)),
+                      'cond' = c(rep('Tumor', 100), rep('Tumor-SG', 100),
+                                 rep('Tumor', 100), rep('Tumor-SG', 100),
+                                 rep('Tumor', 100), rep('Tumor-SG', 100)),
+                      'value' = c(mouse_pred$GBM12, mouse_pred$GBM12_SG,
+                                  mouse_pred$GBM38, mouse_pred$GBM38_SG,
+                                  mouse_pred$HF2303, mouse_pred$HF2303_SG))
+
+                                       
+
+p = ggplot(mouse_df, aes(x = sample, y = value, fill = cond)) +
+  geom_violin(trim = T, scale = 'width', position = position_dodge(0.8), 
+              alpha = 0.7) +
+  geom_boxplot(width = 0.1, outlier.shape = NA, position = position_dodge(0.8)) +
+  stat_summary(fun=mean, geom="point", size=1, shape = 1, 
+               position = position_dodge(0.8), color="black") + 
+  theme_classic(base_size = 14) +
+  theme(legend.position="none", axis.text.x = element_text(angle = 45, vjust = 0.5)) +
+  scale_fill_manual(values=c("#f16623", "#23aef1")) 
+
+p
+
+ggsave(filename = 'mice_pred_serine_plasma_glioma_config_mice_nat_rev.pdf',
+       plot = p, device = 'pdf', width = 4.5, height = 3)
+
+stats_plasma_ser = ggpubr::compare_means(data = mouse_df, 
+                                       formula = value ~ cond, 
+                                       group.by = 'sample', 
+                                       p.adjust.method = 'holm')
+write.csv(stats_plasma_ser, file = "stats_mice_pred_serine_plasma_glioma_config_mice_nat_rev_cond_wilcox_holm.csv")
+
+stats_plasma_ser = ggpubr::compare_means(data = mouse_df, 
+                                         formula = value ~ sample, 
+                                         group.by = 'cond', 
+                                         p.adjust.method = 'holm')
+
+write.csv(stats_plasma_ser, file = "stats_mice_pred_serine_plasma_glioma_config_mice_nat_rev_wilcox_holm.csv")
+
+# TRP vs. GBM38 ---------------------------------------------------------------
+mouse_pred_dir  = './gmp_denovo_glioma_config_20240517_1138/mice_pred_gmp_denovo_glioma_TRP_GBM38/'
+pred_nat_rev = list.files(path = mouse_pred_dir, recursive = T)
+mouse_pred = list()
+
+for (i in pred_nat_rev){
+  mouse_file = read.delim(file = paste(mouse_pred_dir, i, sep = ''), 
+                          header = T, quote = "")
+  mouse_cond = substr(i, 1, nchar(i) - 23)
+  mouse_pred[[mouse_cond]] = mouse_file$pred_gmp_denovo_TRP_GBM38_imputed_config
+  
+}
+mouse_pred = as.data.frame(mouse_pred)
+
+mouse_df = data.frame('sample' = c(rep('TRP', 100), rep('GBM38', 100)),
+                      'value' = c(mouse_pred$TRP, mouse_pred$GBM38))
+mouse_df$sample = factor(mouse_df$sample, levels = c('TRP', 'GBM38'))
+
+p = ggplot(mouse_df, aes(x = sample, y = value, fill = sample)) +
+  geom_violin(trim = T, scale = 'width', position = position_dodge(0.8), 
+              alpha = 0.7) +
+  geom_boxplot(width = 0.1, outlier.shape = NA, position = position_dodge(0.8)) +
+  stat_summary(fun=mean, geom="point", size=1, shape = 1, 
+               position = position_dodge(0.8), color="black") + 
+  theme_classic(base_size = 14) +
+  theme(legend.position="none", axis.text.x = element_text(angle = 45, vjust = 0.5)) +
+  scale_fill_manual(values=c("#7ecbec", "#f795bd")) 
+
+p
+
+ggsave(filename = 'mice_pred_gmp_denovo_TRP_GBM38.pdf',
+       plot = p, device = 'pdf', width = 2, height = 3)
+
+stats_gmp = ggpubr::compare_means(data = mouse_df, 
+                                  formula = value ~ sample, 
+                                  p.adjust.method = 'holm')
+
+write.csv(stats_gmp, file = "stats_mice_pred_gmp_denovo_TRP_GBM38_holm.csv")

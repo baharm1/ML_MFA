@@ -4,6 +4,9 @@
 # Import Libraries ------------------------------------------------------------
 # R 4.2.2
 library(Seurat) # version 4.2.0
+library(scCustomize) # version 1.0.0
+library(RColorBrewer) # version 1.1-3
+library(ggplot2) # version 3.4.2
 
 # Read Darmanis dataset -------------------------------------------------------
 # Load preprocessed data saved in scRNA_analysis_Darmanis.R
@@ -25,6 +28,17 @@ list_serine_genes = c('PHGDH', 'PSAT1', 'PSPH',
                       'SLC36A1',
                       'SLC38A1', 'SLC38A2', 'SLC38A4', 'SLC38A5', 'SLC38A7')
 
+# Figure S2I
+p = DotPlot_scCustom(seuobj, features = list_serine_genes, 
+                     group.by = 'major_cell_type',
+                     flip_axes = T, x_lab_rotate = T) +
+  theme(text = element_text(size = 14)) +
+  scale_colour_gradientn(colours = rev(brewer.pal(11, name = 'RdYlBu')), 
+                         limits = c(-2.5, 2.5))
+
+ggsave(filename = 'dotplot_major_cell_type_serine_all.pdf', plot = p, 
+       device = 'pdf', height = 10, width = 6, units = 'in')
+	   
 # Create block diagonal matrix ------------------------------------------------
 # normalized gene expression of each cell type are combined in 
 # a block diagonal matrix: 

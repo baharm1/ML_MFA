@@ -146,7 +146,8 @@ These files can be found in `../metabolic_CNN/data/sim_data` folder for serine a
 
 ## Evaluation of simulated data
 
-To investigate whether simulated MIDs resemble patient MIDs:
+To investigate whether simulated MIDs resemble patient MIDs, the following criteria were followed:
 * Ranges of simulated MIDs overlap with patient MIDs.
 * T-SNE analysis of simualted MIDs and patient MIDs projects them into a same space.
+
 These analyses can be found in `evaluate_simulated_data.R`.

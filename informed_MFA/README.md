@@ -10,6 +10,14 @@ Model parameters consist of fluxes and isotopomers of plasma serine and phosphog
 ## Requirements
 * MATLAB R2021b with the following package:
 	* Artelys Knitro software 12.4
+* R 4.2.2 with the following packages:
+	* RColorBrewer 1.1-3
+	* see 0.8.0
+	* ggplot2 3.4.2
+	* dplyr 1.1.2
+	* gghalves 0.1.4
+	* tidyr 1.3.0
+	* readxl 1.4.2
 
 ## Usage 
 The following input files are required to run `MFA_with_ML_fluxes.m`:

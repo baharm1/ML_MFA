@@ -1,10 +1,8 @@
 # Import libraries ------------------------------------------------------------
 library(tidyr)
 library(RColorBrewer)
-library(see)
 library(ggplot2)
 library(dplyr)
-library(gghalves)
 library(stringr)
 library(Seurat)
 library(ggbeeswarm)

@@ -290,3 +290,264 @@ stats_gmp = ggpubr::compare_means(data = mouse_df,
                                   p.adjust.method = 'holm')
 
 write.csv(stats_gmp, file = "stats_mice_pred_gmp_denovo_TRP_GBM38_holm.csv")
+
+
+# correlation plots -----------------------------------------------------------
+# Figure 3I, S3L-M 
+# plot M+3 serine to M+3 PG and M+1 serine to M+1 plasma serine
+ML_pred_dir = "./all_patients_pred_serine_CNN/"
+
+glioma_denovo = read.delim(file = paste(ML_pred_dir, 'pred_denovo_glioma_20240408_1327.txt', 
+                                        sep = ''), 
+                           header = T, sep = '\t')
+
+glioma_plasma = read.delim(file = paste(ML_pred_dir, 'pred_plasma_glioma_20240408_2102.txt', 
+                                        sep = ''), 
+                           header = T, sep = '\t')
+glioma_tme = read.delim(file = paste(ML_pred_dir, 'pred_tme_glioma_20240408_1327_2102.txt', 
+                                        sep = ''), 
+                           header = T, sep = '\t')
+cortex_denovo = read.delim(file = paste(ML_pred_dir, 'pred_denovo_cortex_20240508_1220.txt', 
+                                        sep = ''), 
+                           header = T, sep = '\t')
+cortex_plasma = read.delim(file = paste(ML_pred_dir, 'pred_plasma_cortex_20240508_1220.txt', 
+                                        sep = ''), 
+                           header = T, sep = '\t')
+
+patient_site_names = colnames(glioma_denovo)
+
+patient_folders = list.dirs(path = "./data/patient_data/patient_mid_mc_serine/",
+                            recursive = F)
+mid_names = read.delim(file = "./data/patient_data/mid_name_patient_serine.txt", 
+                       header = F, sep = '\t')
+
+for (ps in 1:ncol(glioma_denovo)){
+patient_mids = read.delim(file = patient_folders[ps], header = F, sep = '\t')
+
+colnames(patient_mids) = mid_names$V1
+
+glioma_denovo[[paste(patient_site_names[ps], 'M3', sep = '_')]] = patient_mids$SER3 / patient_mids$PG3
+glioma_plasma[[paste(patient_site_names[ps], 'M1', sep = '_')]] = patient_mids$SER1 / patient_mids$SERp1
+
+glioma_tme[[paste(patient_site_names[ps], 'M1', sep = '_')]] = patient_mids$SER1 / patient_mids$SERc1
+glioma_tme[[paste(patient_site_names[ps], 'M2', sep = '_')]] = patient_mids$SER2 / patient_mids$SERc2
+glioma_tme[[paste(patient_site_names[ps], 'M3', sep = '_')]] = patient_mids$SER3 / patient_mids$SERc3
+
+cortex_denovo[[paste(patient_site_names[ps], 'M3', sep = '_')]] = patient_mids$SERc3 / patient_mids$PGc3
+cortex_plasma[[paste(patient_site_names[ps], 'M1', sep = '_')]] = patient_mids$SERc1 / patient_mids$SERp1
+
+}
+
+# Figure S3K-L
+glioma_denovo_cor = calculateCorrelation(glioma_denovo)
+pdf(file = 'corrplot_glioma_denovo.pdf', width = 10, height = 10)
+p = correlationPlot(glioma_denovo_cor$M, glioma_denovo_cor$adj_pval)
+print(p)
+dev.off()
+
+glioma_plasma_cor = calculateCorrelation(glioma_plasma)
+pdf(file = 'corrplot_glioma_plasma.pdf', width = 10, height = 10)
+p = correlationPlot(glioma_plasma_cor$M, glioma_plasma_cor$adj_pval)
+print(p)
+dev.off()
+
+glioma_tme_cor = calculateCorrelation(glioma_tme)
+pdf(file = 'corrplot_glioma_tme.pdf', width = 20, height = 20)
+p = correlationPlot(glioma_tme_cor$M, glioma_tme_cor$adj_pval)
+print(p)
+dev.off()
+
+glioma_denovo_ps = colMeans(glioma_denovo)
+glioma_plasma_ps = colMeans(glioma_plasma)
+
+cortex_denovo_ps = colMeans(cortex_denovo)
+cortex_plasma_ps = colMeans(cortex_plasma)
+
+glioma_ps = rbind(glioma_denovo_ps[16:30], 
+                  glioma_plasma_ps[16:30],
+                  cortex_denovo_ps[16:30],
+                  cortex_plasma_ps[16:30])
+
+glioma_ps_ML = rbind(glioma_denovo_ps[1:15],
+                    glioma_plasma_ps[1:15],
+                    cortex_denovo_ps[1:15],
+                    cortex_plasma_ps[1:15])
+
+cortex_ps_ML = rbind(cortex_denovo_ps,
+                     cortex_plasma_ps)
+
+rownames(cortex_ps_ML) = c('denovo_c', 'plasma_c')
+
+rownames(glioma_ps) = c('SERg3/PGg3', 
+                        'SERg1/SERp1', 
+                        'SERc3/PGc3', 
+                        'SERc1/SERp1')
+
+rownames(glioma_ps_ML) = c('denovo_g', 
+                           'plasma_g', 
+                           'denovo_c', 
+                           'plasma_c')
+
+scaled_glioma_ps = scale(t(glioma_ps))
+scaled_glioma_ps_ML = scale(t(glioma_ps_ML))
+scaled_cortex_ps_ML = scale(t(cortex_ps_ML))
+  
+pdf(file = 'pheatmap_patient_MID_ratio.pdf', width = 10, height = 3)
+pheatmap(t(scaled_glioma_ps), cluster_rows = F, cluster_cols = F, show_rownames = T,
+         color = COL1('OrRd'))
+dev.off()
+
+pdf(file = 'pheatmap_patient_ML_ratio_OrRd.pdf', width = 10, height = 3)
+pheatmap(t(scaled_glioma_ps_ML), cluster_rows = F, cluster_cols = F, show_rownames = T,
+         color = COL1('OrRd'))#YlGn
+dev.off()
+
+cortex_denovo = read.delim(file = paste(ML_pred_dir, 'ML_denovo_cortex_1615_NandE.txt', 
+                                        sep = ''), 
+                           header = T, sep = '\t')
+cortex_plasma = read.delim(file = paste(ML_pred_dir, 'ML_plasma_cortex_1615_NandE.txt', 
+                                        sep = ''), 
+                           header = T, sep = '\t')
+
+pdf(file = 'pheatmap_patient_ML_ratio_cortex_OrRd.pdf', width = 5, height = 3)
+pheatmap(t(scaled_cortex_ps_ML), cluster_rows = F, cluster_cols = F, show_rownames = T,
+         color = COL1('OrRd'))
+dev.off()
+
+plasma_all = read.delim(file = paste(ML_pred_dir, 'ML_plasma_1327_2102_1615_NandE.txt', 
+                                        sep = ''), 
+                           header = T, sep = '\t')
+scaled_denovo = scale(t(colMeans(denovo_all)))
+pheatmap(t(scaled_denovo), cluster_rows = F, cluster_cols = F, show_rownames = T,
+         color = COL1('YlGn'))
+
+# Figure 3I -------------------------------------------------------------------
+#240523 - scatter plots - correlation of scaled flux & MID ratio
+scaled_glioma_ps = data.frame(scaled_glioma_ps)
+scaled_glioma_ps_ML = data.frame(scaled_glioma_ps_ML)
+
+denovog_ser3 = data.frame('SERg3.PG3' = scaled_glioma_ps$SERg3.PGg3,
+                          'denovo_g' = scaled_glioma_ps_ML$denovo_g,
+                          'patient' = factor(seq(1, nrow(scaled_glioma_ps))))
+
+plasmag_ser1 = data.frame('SERg1.SERp1' = scaled_glioma_ps$SERg1.SERp1,
+                          'plasma_g' = scaled_glioma_ps_ML$plasma_g,
+                          'patient' = factor(seq(1, nrow(scaled_glioma_ps))))
+library("ggpubr")
+p = ggscatter(denovog_ser3, x = "SERg3.PG3", y = "denovo_g", color = "patient",
+          add = "reg.line", conf.int = TRUE, 
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "SERg3/PGg3", ylab = "Glucose-derived serine synthesis flux",
+          label = "patient") +
+  geom_smooth(method = "lm", color = "black") 
+  
+ggsave(filename = paste('scatter', 'denovo_c_SERc3_PGc3_cor',
+                        '.pdf', sep = '_'), 
+       plot = p, device = 'pdf', width = 5, height = 5.5, units = 'in')
+
+p = ggscatter(plasmag_ser1, x = "SERg1.SERp1", y = "plasma_g", color = "patient",
+              add = "reg.line", conf.int = TRUE, 
+              cor.coef = TRUE, cor.method = "pearson",
+              xlab = "SERg1/SERp1", ylab = "Plasma serine uptake flux",
+              label = "patient") +
+  geom_smooth(method = "lm", color = "black") 
+
+ggsave(filename = paste('scatter', 'plasma_c_SERc1_SERp1_cor',
+                        '.pdf', sep = '_'), 
+       plot = p, device = 'pdf', width = 5, height = 5.5, units = 'in')
+
+# add cortex MIDs from nonenhancing and enhancing 
+cortex_denovo = read.delim(file = paste(ML_pred_dir, 'ML_denovo_cortex_1615_NandE.txt', 
+                                        sep = ''), 
+                           header = T, sep = '\t')
+cortex_plasma = read.delim(file = paste(ML_pred_dir, 'ML_plasma_cortex_1615_NandE.txt', 
+                                        sep = ''), 
+                           header = T, sep = '\t')
+
+for (ps in 1:(ncol(cortex_denovo)-1)){
+  patient_mids = read.delim(file = paste(patient_folders[2*ps-1], '/mid_mc.txt', sep = ''), 
+                            header = F, sep = '\t')
+  
+  colnames(patient_mids) = mid_names$V1
+  E3 = patient_mids$SERc3 / patient_mids$PGc3
+  E1 = patient_mids$SERc1 / patient_mids$SERp1
+  
+  patient_mids = read.delim(file = paste(patient_folders[2*ps], '/mid_mc.txt', sep = ''), 
+                            header = F, sep = '\t')
+  
+  colnames(patient_mids) = mid_names$V1
+  N3 = patient_mids$SERc3 / patient_mids$PGc3
+  N1 = patient_mids$SERc1 / patient_mids$SERp1
+  
+  cortex_denovo[[paste(patient_site_names[2*ps-1], 'M3', sep = '_')]] = c(E3, N3)
+  cortex_plasma[[paste(patient_site_names[2*ps-1], 'M1', sep = '_')]] = c(E1, N1)
+  
+}
+ps = 8
+patient_mids = read.delim(file = paste(patient_folders[2*ps-1], '/mid_mc.txt', sep = ''), 
+                          header = F, sep = '\t')
+
+colnames(patient_mids) = mid_names$V1
+E3 = patient_mids$SERc3 / patient_mids$PGc3
+E1 = patient_mids$SERc1 / patient_mids$SERp1
+
+cortex_denovo[[paste(patient_site_names[2*ps-1], 'M3', sep = '_')]] = c(E3, E3)
+cortex_plasma[[paste(patient_site_names[2*ps-1], 'M1', sep = '_')]] = c(E1, E1)
+
+library(RcmdrMisc)
+cortex_denovo_cor = calculateCorrelation(cortex_denovo)
+pdf(file = 'corrplot_cortex_denovo_200.pdf', width = 10, height = 10)
+p = correlationPlot(cortex_denovo_cor$M, cortex_denovo_cor$adj_pval)
+print(p)
+dev.off()
+
+cortex_plasma_cor = calculateCorrelation(cortex_plasma)
+pdf(file = 'corrplot_cortex_plasma_200.pdf', width = 10, height = 10)
+p = correlationPlot(cortex_plasma_cor$M, cortex_plasma_cor$adj_pval)
+print(p)
+dev.off()
+
+
+cortex_denovo_ps = colMeans(cortex_denovo)
+cortex_plasma_ps = colMeans(cortex_plasma)
+
+cortex_ps = rbind(cortex_denovo_ps[9:16],
+                  cortex_plasma_ps[9:16])
+
+cortex_ps_ML = rbind(cortex_denovo_ps[1:8],
+                     cortex_plasma_ps[1:8])
+
+rownames(cortex_ps) = c('SERg3/PGg3', 
+                        'SERg1/SERp1')
+
+rownames(cortex_ps_ML) = c('denovo_g', 
+                           'plasma_g')
+
+scaled_cortex_ps = scale(t(cortex_ps))
+scaled_cortex_ps_ML = scale(t(cortex_ps_ML))
+
+scaled_glioma_ps = scaled_cortex_ps
+scaled_glioma_ps_ML = scaled_cortex_ps_ML
+
+# functions -------------------------------------------------------------------
+
+correlationPlot = function(M, adj_pval){
+  p = corrplot(M, type = "full", method = 'ellipse', col = rev(COL2('PiYG')),
+               tl.col = "black", tl.cex = 1.5, p.mat = adj_pval, 
+               sig.level = c(0.001, 0.01, 0.05), pch.cex = 1.1,
+               insig = 'label_sig', diag = F) 
+  return(p)
+}
+
+calculateCorrelation = function(df){
+  M = cor(df, method = 'pearson')
+  M = M[rowSums(is.na(M)) != ncol(M) - 1, colSums(is.na(M)) != nrow(M) - 1]
+  
+  adj_pval = rcorr.adjust(df)
+  adj_pval = adj_pval$P
+  adj_pval = ifelse(adj_pval == "<.0001", 0.0001, as.numeric(adj_pval))
+  adj_pval = adj_pval[rowSums(is.na(adj_pval)) != ncol(adj_pval), 
+                      colSums(is.na(adj_pval)) != nrow(adj_pval)]
+  
+  return(list('M' = M, 'adj_pval' = adj_pval))
+}

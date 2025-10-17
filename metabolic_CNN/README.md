@@ -18,7 +18,9 @@ conda install -c conda-forge cudatoolkit=11.2 cudnn=8.1.0
 pip install tensorflow == 2.10.1
 ```
 To verify tensorflow installation:
+```
 python -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
+```
 
 * R 4.2.2 for visualization and data preparation with the following packages:
 	* Seurat 4.2.0
@@ -95,8 +97,8 @@ python -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU')
 	python CNN_pred_mouse_patient.py --help
 	```
 	Use the following config files to reproduce the results shown in the manuscript:
-	* `pred_serine_denovo_cortex_config`: predict relative flux of glucose-derived serine synthesis in cortex
-	* `pred_serine_denovo_glioma_config`: predict relative flux of glucose-derived serine synthesis in glioma
-	* `pred_serine_plasma_glioma_config`: predict relative flux of plasma serine uptake in glioma
-	* `pred_gmp_denovo_glioma_config`: predict relative flux of GMP _de novo_ synthesis in glioma
+	* `pred_serine_denovo_cortex_config`: predict relative flux of glucose-derived serine synthesis in cortex for GBM12-, GBM38-, HF2303-bearing mice and patients
+	* `pred_serine_denovo_glioma_config`: predict relative flux of glucose-derived serine synthesis in glioma for GBM12-, GBM38-, HF2303-bearing mice and patients
+	* `pred_serine_plasma_glioma_config`: predict relative flux of plasma serine uptake in glioma for GBM12-, GBM38-, HF2303-bearing mice and patients
+	* `pred_gmp_denovo_glioma_config`: predict relative flux of GMP _de novo_ synthesis in glioma for MMF-treated GBM38-bearing mice and patients
 	* `pred_gmp_denovo_TRP_GBM38_config`: predict relative flux of GMP _de novo_ synthesis in TRP and GBM38 tumors

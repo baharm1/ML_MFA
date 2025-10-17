@@ -30,6 +30,9 @@ python -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU')
 	* ggpubr 0.4.0
 	* ggbeeswarm 0.7.2
 	* stringr 1.5.0
+	* RcmdrMisc 2.7-2
+	* pheatmap 1.0.12
+	* corrplot 0.92
 
 ## Usage
 1. Create config file: The input arguments are provided to the model via a JSON file, which includes the following dictionary required for `run_metabolic_CNN.py` to run:

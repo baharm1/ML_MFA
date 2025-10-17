@@ -7,6 +7,9 @@ library(stringr)
 library(Seurat)
 library(ggbeeswarm)
 library(ggpubr)
+library(RcmdrMisc)
+library(pheatmap)
+library(corrplot)
 
 # Plot CNN-predicted relative de novo GMP synthesis flux MMF-treated mice ----
 
@@ -431,7 +434,7 @@ denovog_ser3 = data.frame('SERg3.PG3' = scaled_glioma_ps$SERg3.PGg3,
 plasmag_ser1 = data.frame('SERg1.SERp1' = scaled_glioma_ps$SERg1.SERp1,
                           'plasma_g' = scaled_glioma_ps_ML$plasma_g,
                           'patient' = factor(seq(1, nrow(scaled_glioma_ps))))
-library("ggpubr")
+
 p = ggscatter(denovog_ser3, x = "SERg3.PG3", y = "denovo_g", color = "patient",
           add = "reg.line", conf.int = TRUE, 
           cor.coef = TRUE, cor.method = "pearson",
@@ -492,7 +495,7 @@ E1 = patient_mids$SERc1 / patient_mids$SERp1
 cortex_denovo[[paste(patient_site_names[2*ps-1], 'M3', sep = '_')]] = c(E3, E3)
 cortex_plasma[[paste(patient_site_names[2*ps-1], 'M1', sep = '_')]] = c(E1, E1)
 
-library(RcmdrMisc)
+
 cortex_denovo_cor = calculateCorrelation(cortex_denovo)
 pdf(file = 'corrplot_cortex_denovo_200.pdf', width = 10, height = 10)
 p = correlationPlot(cortex_denovo_cor$M, cortex_denovo_cor$adj_pval)

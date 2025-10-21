@@ -1,6 +1,6 @@
 # Digital twins for _in vivo_ metabolic flux estimation in patients with brain cancer 
 
-The codes related to our manuscript **"Digital twins for _in vivo_ metabolic flux estimation in brain cancer patients"** can be found in this repository.
+The codes related to our manuscript **"Digital twins for _in vivo_ metabolic flux estimation in patients with brain cancer"** can be found in this repository.
 
 We organized the codes into following folders and provided a detailed description for using the codes in each folder. Please click on the links below to see the codes and README files.
 
@@ -48,4 +48,4 @@ We organized the codes into following folders and provided a detailed descriptio
 More detailed requirements can be found in each folder.
 
 ## Citation
-Meghdadi B. _et al._ Digital twins for _in vivo_ metabolic flux estimation in brain cancer patients. _Cell Metabolism_ (2025). 
+Meghdadi B. _et al._ Digital twins for _in vivo_ metabolic flux estimation in patients with brain cancer. _Cell Metabolism_ (2025). 

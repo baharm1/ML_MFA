@@ -47,5 +47,12 @@ We organized the codes into following folders and provided a detailed descriptio
 
 More detailed requirements can be found in each folder.
 
+## Data availability
+
+scRNA-seq data are publicly available for download and visualization via the Single Cell Portal: [SCP3323](https://singlecell.broadinstitute.org/single_cell/study/SCP3323/) (patients), [SCP3333](https://singlecell.broadinstitute.org/single_cell/study/SCP3333/) (PDXs), [SCP3334](https://singlecell.broadinstitute.org/single_cell/study/SCP3334/) (TRP). 
+Raw scRNA-seq data are available at Gene Expression Omnibus (GEO): [GSE311151](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE311151) (patients) and [GSE311464](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE311464) (PDXs and TRP). 
+Seurat objects containing processed scRNA-seq and simulated data are available at Zenodo: https://doi.org/10.5281/zenodo.17373726. Description of files deposited to Zenodo can be found in [figure_descriptions.xlsx](https://zenodo.org/records/17373726/files/figure_descriptions.xlsx).
+All data used to generate display items in the manuscript are available in [Data S1](https://ars.els-cdn.com/content/image/1-s2.0-S1550413125004826-mmc2.xlsx).
+
 ## Citation
 Meghdadi B. _et al._ Digital twins for _in vivo_ metabolic flux estimation in patients with brain cancer. _Cell Metabolism_ (2026). DOI: [10.1016/j.cmet.2025.10.022](https://doi.org/10.1016/j.cmet.2025.10.022)

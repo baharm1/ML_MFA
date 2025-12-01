@@ -48,4 +48,4 @@ We organized the codes into following folders and provided a detailed descriptio
 More detailed requirements can be found in each folder.
 
 ## Citation
-Meghdadi B. _et al._ Digital twins for _in vivo_ metabolic flux estimation in patients with brain cancer. _Cell Metabolism_ (2025). 
+Meghdadi B. _et al._ Digital twins for _in vivo_ metabolic flux estimation in patients with brain cancer. _Cell Metabolism_ (2026). DOI: [10.1016/j.cmet.2025.10.022](https://doi.org/10.1016/j.cmet.2025.10.022)

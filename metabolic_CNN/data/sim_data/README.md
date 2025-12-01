@@ -1,0 +1,1 @@
+Simulated fluxes and MIDs are available at [https://doi.org/10.5281/zenodo.17373726](https://doi.org/10.5281/zenodo.17373726). Procedure to generate simulated fluxes and MIDs were described in `data_simulation` folder.
